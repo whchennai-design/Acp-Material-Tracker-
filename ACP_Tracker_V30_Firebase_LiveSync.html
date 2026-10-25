@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f8fafc">
+<title>ACP Sheet Tracker V30 - GRN Photo Import + FIFO Report</title>
+<style>
+:root{--bg:#f3f6fa;--card:#fff;--ink:#172b3a;--muted:#647583;--line:#dce4eb;--blue:#087fb5;--green:#08783c;--greenbg:#eaf8ef;--orange:#ea580c;--orangebg:#fff1df;--purple:#7e22ce;--purplebg:#f5eaff;--shadow:0 6px 20px #19324a12}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink)}button,input,select{font:inherit}button{cursor:pointer;border:0}header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-size:20px;font-weight:850;letter-spacing:-.4px}.header-actions{display:flex;gap:8px}.pill{background:#eef3f7;border:1px solid #dbe3ea;padding:8px 12px;border-radius:12px;font-weight:700;color:#536575}.pill.active{background:var(--blue);color:#fff}.wrap{max-width:900px;margin:auto;padding:16px 13px 92px}.tabs{display:flex;gap:8px;margin:2px 0 16px}.tab{flex:1;padding:12px;border-radius:12px;background:#e5edf3;color:#4c6272;font-weight:750}.tab.active{background:var(--blue);color:white}.section-title{font-size:25px;font-weight:850;margin:14px 0}.panel{background:#f7f9fc;border:1px solid var(--line);border-radius:22px;padding:16px;box-shadow:var(--shadow)}.row{display:flex;gap:12px}.field{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1;margin-bottom:12px}.field label{font-size:14px;color:var(--muted);font-weight:650}.field input,.field select{width:100%;min-width:0;border:1px solid #d5dfe7;border-radius:13px;background:#fff;padding:13px 12px;min-height:49px;color:var(--ink);outline:none}.field input:not([type=date]){text-transform:uppercase}.field input:focus,.field select:focus{border:2px solid var(--blue);padding:12px 11px}.thickness-entry{position:relative;display:block}.thickness-entry input{width:100%;padding-right:44px!important}.thickness-entry select{position:absolute;right:3px;top:3px;bottom:3px;width:38px;min-height:0;height:calc(100% - 6px);border:0!important;background:transparent!important;padding:0 2px!important;appearance:auto;color:var(--muted)}.date-range-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10px}.date-range-controls{display:grid;grid-template-columns:1fr;gap:0 10px}.date-range-controls .field{margin-bottom:8px}.status-filter-label{display:flex;align-items:center;justify-content:space-between;gap:8px}.filter-toggle{width:30px;height:28px;flex-shrink:0;border-radius:8px;background:#e1f3fb;color:#007fa8;font-weight:900;font-size:15px;line-height:1}.filter-toggle[aria-expanded=true]{background:#007fa8;color:#fff;transform:none}.dark .filter-toggle{background:#263947;color:#bae6fd}.dark .filter-toggle[aria-expanded=true]{background:#087fb5;color:#fff}.search-wrap{position:relative;margin-bottom:10px}.search-wrap .search{margin:0;padding-right:48px}.clear-search{position:absolute;right:7px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:#e7eef4;color:#425969;font-size:22px;font-weight:800;display:block}.filter-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10px}.stock-batch-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.stock-batch-row .field{min-width:0}.stock-batch-row .field input{padding-left:9px;padding-right:9px}.filter-grid .field{margin-bottom:8px}.filter-grid #customDateFields{grid-column:1 / -1}.filter-heading{font-size:13px;color:var(--muted);font-weight:800;margin:6px 0 8px}.step{display:flex;align-items:center;gap:9px;margin:12px 0 14px;font-size:17px;font-weight:850}.step-num{width:30px;height:30px;display:grid;place-items:center;background:var(--blue);color:#fff;border-radius:50%;flex-shrink:0}.step-num.green{background:#079455}.hint{font-size:12px;font-weight:500;color:var(--muted)}.sizes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}.size-btn{background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px 3px;font-weight:800;color:var(--ink)}.size-btn.selected{background:#e1f3ff;border:2px solid var(--blue);padding:12px 2px;color:#075985}.rack-row{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.8fr) 38px 38px;gap:6px;align-items:end}.rack-row .field{margin-bottom:10px}.rack-row{scroll-margin-top:90px;scroll-margin-bottom:150px}.primary,.inline-save,.inline-edit-save{scroll-margin-bottom:150px}.rack-control{height:49px;width:42px;border-radius:13px;font-size:25px;font-weight:900;margin-bottom:10px}.add-rack{background:#d8f7e6;border:1px solid #91d7ae;color:var(--green)}.remove-rack{background:#fee2e2;border:1px solid #fecaca;color:#b91c1c}.saved-racks{display:flex;gap:7px;flex-wrap:wrap;margin:2px 0 14px}.rack-chip{background:#e6f0f8;color:#203b4e;padding:8px 12px;border-radius:999px;font-weight:750}.rack-chip button{background:transparent;color:#b91c1c;font-weight:900;margin-left:5px}.primary{width:100%;padding:15px;border-radius:15px;background:linear-gradient(135deg,#0785bd,#006aa1);color:white;font-size:18px;font-weight:850;box-shadow:0 8px 18px #0284c733}.secondary{padding:10px 12px;border-radius:11px;background:#e7f2f8;color:#075985;font-weight:750}.danger{background:#fee2e2;color:#991b1b}.note{font-size:12px;color:var(--muted);margin:10px 0 0}.cards{display:grid;gap:12px}.material-card{background:#fff;border:1px solid #dce4eb;border-radius:16px;padding:12px;box-shadow:var(--shadow)}.card-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.swatch{width:19px;height:19px;border-radius:5px;border:1px solid #9ca3af}.material-name{font-weight:900;font-size:18px;flex:1}.tag{font-size:12px;font-weight:800;padding:5px 8px;border-radius:5px;background:#e0f2fe;color:#075985}.tag.branch{background:#f3e8ff;color:#7e22ce}.meta{display:flex;gap:9px;align-items:center;flex-wrap:wrap;color:#526574;font-size:12px;margin:9px 0}.stock-total{margin-left:auto;font-weight:800}.rack-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.rack-box{border:1px solid #15803d;border-radius:8px;background:#effcf3;padding:5px 7px;display:flex;align-items:center;justify-content:space-between;gap:6px;min-width:0}.rack-code{font-weight:850;color:#14532d;overflow:hidden;text-overflow:ellipsis}.rack-qty{background:#08752d;color:#fff;padding:4px 8px;border-radius:5px;font-weight:850;min-width:39px;text-align:center}.status-row{cursor:pointer;user-select:none;outline:0;transition:box-shadow .15s,transform .15s}.status-row:focus,.status-row:active{box-shadow:0 0 0 3px #38bdf866;transform:translateY(-1px)}.status-row.pending{cursor:pointer}.status-row.pending:hover{box-shadow:0 0 0 3px #7dd3fc88}.status-row.complete{cursor:default}.status-row{margin-top:9px;padding:8px 10px;border-radius:9px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:850}.status-row.pending{background:var(--orangebg);color:#c2410c;border:1px solid #fed7aa}.status-row.complete{background:var(--purplebg);color:var(--purple);border:1px solid #e9d5ff}.status-main{font-size:13px}.status-count{font-size:12px;color:#45596a;white-space:nowrap}.status-count strong{font-size:20px;color:inherit}.card-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.card-actions button{padding:8px 10px;border-radius:9px;background:#edf3f7;color:#324c5e;font-weight:750;font-size:12px}.card-actions button[data-move]{background:#08783c;color:#fff;padding:11px 13px;font-size:13px;box-shadow:0 3px 8px #08783c30}.card-actions button[data-edit]{background:#e0f2fe;color:#075985}.card-actions button[data-history-details]{background:#dff4ff;color:#0369a1;border:1px solid #bae6fd}.material-audit-panel{margin-top:10px;padding:12px;border:1px solid #9ccfe8;border-radius:12px;background:#f0f9ff;color:#17384a}.material-audit-panel h4{margin:0 0 8px}.audit-row{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #cfe3ef;font-size:12px}.audit-row:last-child{border-bottom:0}.audit-row strong{text-align:right;white-space:nowrap}.dark .material-audit-panel{background:#162c3a;color:#e5f5ff;border-color:#36576b}.dark .audit-row{border-color:#36576b}.inline-move-editor .rack-row .field{margin-bottom:8px}.rack-detail-trigger{width:100%;font:inherit;text-align:left;cursor:pointer;border:1px solid #208451}.inline-edit-editor{margin-top:10px;padding:12px;border:2px solid #1684b8;border-radius:14px;background:#eef8ff}.inline-edit-editor h3{color:#087fb5}.inline-edit-editor input,.inline-edit-editor select{text-transform:uppercase}.inline-edit-save{background:#087fb5!important;color:#fff!important;font-weight:800!important}.inline-move-editor{margin-top:10px;padding:10px;border:1px solid #b7e4c7;border-radius:12px;background:#f0fdf4}.inline-move-editor input{text-transform:uppercase}.dark .inline-move-editor{background:#173a29;border-color:#286344}.fifo-status{display:inline-block;margin:8px 0 2px;padding:6px 9px;border-radius:8px;font-size:12px;font-weight:850}.fifo-good{background:#dcfce7;color:#166534;border:1px solid #86efac}.fifo-bad{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}.fifo-rank{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:27px;padding:0 8px;border-radius:999px;background:#dcfce7;color:#166534;border:1px solid #86efac;font-size:12px;font-weight:900;letter-spacing:.2px;white-space:nowrap}.fifo-rank.fifo-rank-2{background:#dbeafe;color:#1d4ed8;border-color:#93c5fd}.fifo-rank.fifo-rank-3{background:#f3e8ff;color:#7e22ce;border-color:#d8b4fe}.fifo-rank.fifo-rank-later{background:#f1f5f9;color:#475569;border-color:#cbd5e1}.dark .fifo-rank{background:#173a29;color:#bbf7d0;border-color:#286344}.dark .fifo-rank.fifo-rank-2{background:#1e3a5f;color:#bfdbfe;border-color:#3b82f6}.dark .fifo-rank.fifo-rank-3{background:#3b2454;color:#e9d5ff;border-color:#8b5cf6}.dark .fifo-rank.fifo-rank-later{background:#263947;color:#e2e8f0;border-color:#475569}.empty{padding:28px;text-align:center;color:var(--muted);background:#fff;border:1px dashed #cbd5e1;border-radius:15px}.search{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff;margin-bottom:10px}.history-actions .history-action{flex:1;width:50%;padding:15px 8px;border-radius:15px;font-size:18px}.history-actions .history-action:not(.active){background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none}.history-actions .stock-out-action.active,.stock-out-save{background:linear-gradient(135deg,#dc2626,#991b1b)}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.stat{background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px}.stat small{display:block;color:var(--muted);font-size:11px}.stat strong{font-size:21px}.summary-filter{cursor:pointer;text-align:left;color:var(--ink);font-family:inherit}.summary-filter.active{border:2px solid var(--blue);background:#eaf6fc}.summary-filter[data-summary="moved"].active{border-color:#08783c;background:#eaf8ef}.summary-filter[data-summary="pending"].active{border-color:#b45309;background:#fff1df}.summary-filter small{font-size:13px}.dash-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:14px}.dash-stat{padding:15px;border-radius:15px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)}.dash-stat small{display:block;color:var(--muted);font-weight:650}.dash-stat strong{display:block;font-size:27px;margin-top:4px}.dash-stat.blue strong{color:#087fb5}.dash-stat.green strong{color:#08783c}.dash-stat.orange strong{color:#b45309}.dash-stat.purple strong{color:#7e22ce}.dashboard-panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}.dashboard-line{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}.dashboard-line:last-child{border-bottom:0}.rank-panel h3{margin:0 0 5px;font-size:18px}.rank-row{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:9px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.rank-row:last-child{border-bottom:0}.rank-number{width:27px;height:27px;border-radius:9px;background:#e0f2fe;color:#075985;font-weight:900;display:grid;place-items:center}.rank-info{min-width:0}.rank-info strong{display:block;font-size:14px;overflow-wrap:anywhere}.rank-info small{display:block;color:var(--muted);font-size:11px;margin-top:3px}.rank-qty{font-size:14px;color:#08783c;text-align:right;white-space:nowrap}.rank-empty{padding:12px 0;color:var(--muted);font-size:13px}.dark .rank-number{background:#263947;color:#bae6fd}.dark .rank-qty{color:#86efac}.dark .dash-stat,.dark .dashboard-panel{background:#17232d;color:var(--ink)}.hidden{display:none!important}.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;z-index:10;padding:8px 12px calc(8px + env(safe-area-inset-bottom));gap:8px}.bottom button{flex:1;background:transparent;color:#647583;padding:6px;font-weight:800}.bottom button.active{color:var(--blue)}.toast{position:fixed;bottom:86px;left:50%;transform:translateX(-50%);background:#102a3a;color:#fff;padding:11px 16px;border-radius:12px;z-index:20;box-shadow:var(--shadow);max-width:90%;text-align:center}.dark{--bg:#101820;--card:#17232d;--ink:#edf5fa;--muted:#a4b4c0;--line:#30414e;--shadow:0 6px 20px #0003}.dark header,.dark .bottom,.dark .material-card,.dark .stat,.dark .empty,.dark .field input,.dark .field select,.dark .size-btn,.dark .search{background:#17232d;color:var(--ink);border-color:var(--line)}.dark .panel{background:#16212b}.dark .history-actions .history-action:not(.active){background:#17232d;color:var(--ink)}.dark .rack-box{background:#173a29}.dark .rack-code{color:#bbf7d0}.dark .rack-chip{background:#263947;color:#e3edf4}.dark .tabs .tab{background:#253542;color:#c4d4df}.dark .tabs .tab.active{background:var(--blue);color:#fff}
+/* Compact rack-first inventory list */
+.inventory-rack-card{padding:0;overflow:hidden}.inventory-rack-toggle{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto 24px;align-items:center;gap:10px;padding:16px;background:#fff;text-align:left;border:0;color:var(--ink)}.inventory-rack-label{font-size:20px;font-weight:900}.inventory-rack-total{font-size:17px;font-weight:900;color:#08783c;white-space:nowrap}.inventory-rack-arrow{font-size:22px;font-weight:900;color:#087fb5;text-align:right}.inventory-rack-details{padding:0 12px 12px}.inventory-material-list{display:grid;gap:8px}.inventory-material-item{padding:11px;border:1px solid #cfe7d7;border-radius:11px;background:#f0fdf4}.inventory-material-title{font-size:15px;font-weight:900}.inventory-material-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-top:5px;color:#526574;font-size:13px}.inventory-material-meta strong{color:#08783c;white-space:nowrap}.dark .inventory-rack-toggle{background:#17232d;color:var(--ink)}.dark .inventory-material-item{background:#173a29;border-color:#286344}
+@media(min-width:700px){.wrap{padding:22px 20px 100px}.panel{padding:22px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.material-card{padding:15px}.rack-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:380px){.stock-batch-row{grid-template-columns:1fr 1fr 1fr;gap:5px}.stock-batch-row .field label{font-size:11px}.stock-batch-row .field input{font-size:13px;padding:11px 6px}.row{gap:8px}.sizes{gap:5px}.size-btn{font-size:13px}.rack-row{grid-template-columns:minmax(0,1fr) 72px 36px 36px;gap:5px}.rack-control{width:36px;font-size:22px}.brand{font-size:18px}.panel{padding:12px}.summary{gap:5px}.stat{padding:8px}}
+@media(max-width:420px){.date-range-row{grid-template-columns:1fr;gap:6px}.filter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.history-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px;margin-top:12px}.history-detail-grid>div{min-width:0;padding:9px 10px;border-radius:10px;background:var(--field-bg,#f8fafc);border:1px solid var(--line,#dbe3e8)}.history-detail-grid small{display:block;color:var(--muted,#64748b);font-size:12px;margin-bottom:3px}.history-detail-grid b{display:block;overflow-wrap:anywhere;font-size:14px}.history-detail-grid .history-qty{font-size:17px}@media(max-width:420px){.history-detail-grid{gap:8px}.history-detail-grid>div{padding:8px}}
+
+/* V21: compact rectangular history cards, matching the requested reference layout */
+#historyList{display:grid;gap:12px}
+#historyList .material-card{padding:12px 13px;border-radius:16px;background:#fff;border:1px solid #dce4eb;box-shadow:0 4px 12px rgba(31,55,75,.05)}
+#historyList .card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px}
+#historyList .card-top .tag{font-size:12px;padding:5px 8px;border-radius:6px}
+#historyList .stock-total{margin-left:auto;font-weight:800;font-size:15px;white-space:nowrap}
+#historyList .history-material-line{font-size:15px;line-height:1.35;font-weight:850;overflow-wrap:anywhere;margin:2px 0 7px}
+#historyList .history-meta-line{font-size:13px;line-height:1.45;color:#647583;margin:3px 0;overflow-wrap:anywhere}
+#historyList .history-meta-line strong{color:var(--ink);font-weight:750}
+#historyList .history-qty-line{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:5px;padding-top:7px;border-top:1px solid #e2e8f0}
+#historyList .history-qty{font-size:17px;font-weight:900;white-space:nowrap}
+.dark #historyList .material-card{background:#17232d;border-color:#30414e}
+.dark #historyList .history-qty-line{border-color:#30414e}
+@media(max-width:380px){#historyList .material-card{padding:10px 11px}#historyList .history-material-line{font-size:14px}#historyList .history-meta-line{font-size:12px}#historyList .stock-total{font-size:13px}}
+
+
+.header-left{display:flex;align-items:center;gap:10px;min-width:0}.menu-btn{width:42px;height:42px;border-radius:12px;background:#e4f4fb;color:#087fa8;font-size:23px;font-weight:900;flex-shrink:0}.side-menu{position:fixed;top:74px;left:12px;z-index:30;width:min(270px,calc(100vw - 24px));padding:9px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 14px 36px #142b3c30;display:grid;gap:5px}.side-menu button{padding:13px 12px;border-radius:10px;text-align:left;background:#f0f8fc;color:#17384a;font-weight:800}.side-menu button:active{background:#d8f0fb}.fifo-report-filters{margin-bottom:12px}.fifo-report-filters .field{margin-bottom:8px}.fifo-report-filters .filter-grid{margin-top:2px}.fifo-chart-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.fifo-chart-heading h3{margin:0;font-size:18px}.trend-pill{display:inline-flex;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:900}.trend-pill.up{background:#dcfce7;color:#166534}.trend-pill.down{background:#fee2e2;color:#991b1b}.trend-pill.neutral{background:#e2e8f0;color:#475569}.fifo-bar-chart{display:flex;gap:10px;align-items:stretch;min-height:210px;padding:14px 2px 0;overflow-x:auto;border-bottom:1px solid var(--line)}.fifo-bar-col{flex:1;min-width:42px;max-width:86px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px}.fifo-bar-stack{width:min(100%,38px);height:145px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;border-radius:8px 8px 3px 3px;background:#edf2f7}.fifo-bar-good{background:linear-gradient(180deg,#3b82f6,#075bd8);width:100%;min-height:0}.fifo-bar-bad{background:linear-gradient(180deg,#fb7185,#dc2626);width:100%;min-height:0}.fifo-bar-label{font-size:10px;line-height:1.25;color:var(--muted);text-align:center;white-space:normal;min-height:29px;overflow-wrap:anywhere}.fifo-bar-value{font-size:11px;font-weight:900;white-space:nowrap;color:var(--ink)}.fifo-bar-date{font-size:9px;color:var(--muted);text-align:center;white-space:normal;line-height:1.2}.fifo-bar-col{min-width:48px}.fifo-bar-stack{width:min(100%,38px)}.fifo-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--muted)}.legend-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}.legend-dot.good{background:#16a34a}.legend-dot.bad{background:#ef4444}.fifo-donut-layout{display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding:8px 0}.fifo-donut{width:168px;height:168px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#16a34a 0deg,#e5e7eb 0deg);flex-shrink:0}.fifo-donut-hole{width:116px;height:116px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px var(--line)}.fifo-donut-hole strong{font-size:27px;color:#08783c}.fifo-donut-hole small{font-size:12px;color:var(--muted);font-weight:800}.fifo-donut-key{flex:1;min-width:150px}.fifo-donut-key>div{display:grid;grid-template-columns:14px 1fr auto;align-items:center;gap:5px;padding:8px 0;border-bottom:1px solid var(--line)}.fifo-donut-key .legend-dot{margin:0}.fifo-donut-key strong{font-size:17px}.fifo-table{width:100%;border-collapse:collapse;font-size:12px}.fifo-table th,.fifo-table td{padding:10px 6px;text-align:left;border-bottom:1px solid var(--line)}.fifo-table th{color:var(--muted);font-weight:800}.fifo-table td:last-child,.fifo-table th:last-child{text-align:right}.fifo-table .rate-cell{font-weight:900}.fifo-empty{padding:22px;text-align:center;color:var(--muted);background:#f8fafc;border:1px dashed var(--line);border-radius:12px}.dark .side-menu{background:#17232d}.dark .side-menu button{background:#263947;color:#e2edf4}.dark .fifo-donut-hole{background:#17232d}.dark .fifo-empty{background:#17232d}.dark .menu-btn{background:#263947;color:#bae6fd}
+
+
+.grn-photo-panel{border:1px solid #b9e3f4;background:#f0f9ff;border-radius:15px;padding:13px;margin:10px 0 14px}.grn-photo-actions{display:flex;gap:8px;flex-wrap:wrap}.grn-lines{display:grid;gap:9px;margin:10px 0}.grn-line{display:grid;grid-template-columns:1.2fr .8fr .65fr 1fr .55fr 34px;gap:6px;align-items:end;background:#fff;border:1px solid var(--line);padding:9px;border-radius:12px}.grn-line .field{margin:0}.grn-line input,.grn-line select{width:100%;min-width:0;padding:9px 7px;min-height:42px;border:1px solid #d5dfe7;border-radius:9px;background:#fff;text-transform:uppercase}.grn-line .remove-line{height:42px;border-radius:9px;background:#fee2e2;color:#991b1b;font-weight:900}.grn-labels{display:grid;grid-template-columns:1.2fr .8fr .65fr 1fr .55fr 34px;gap:6px;font-size:11px;font-weight:800;color:var(--muted);padding:0 9px}.grn-status{font-size:12px;color:var(--muted);margin-top:8px}.grn-hidden-legacy{display:none!important}@media(max-width:520px){.grn-line{grid-template-columns:1fr 1fr 1fr;}.grn-line .field:nth-child(1),.grn-line .field:nth-child(4){grid-column:span 2}.grn-line .remove-line{grid-column:3;grid-row:2}.grn-labels{display:none}}
+
+</style>
+</head>
+<body>
+<header><div class="header-left"><button type="button" id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button><div class="brand">ACP Sheet Tracker</div></div><div class="header-actions"><button class="pill" id="darkBtn">Dark</button><button class="pill active" id="lightBtn">Light</button></div></header>
+<div id="sideMenu" class="side-menu hidden"><button type="button" data-menu-view="home">⌂ Home</button><button type="button" data-menu-view="fifoReport">📊 FIFO Report</button><button type="button" data-menu-view="dashboard">▥ Dashboard</button><button type="button" data-menu-view="history">◷ History</button></div>
+<main class="wrap">
+
+<section id="homeView">
+<h1 class="section-title">Goods Receipt Note (GRN)</h1>
+<div class="panel">
+<form id="stockForm">
+<div class="row">
+<div class="field"><label for="date">Date</label><input id="date" type="date" required title="Tap anywhere in this field to open calendar"></div>
+<div class="field"><label for="type">Type</label><select id="type"><option>Plant</option><option>Branch</option></select></div>
+</div>
+<div class="row" id="branchDetails" style="display:none">
+<div class="field"><label for="city">City</label><select id="city"><option value="Cochin">Cochin</option><option value="Hyderabad">Hyderabad</option><option value="Chennai">Chennai</option><option value="Bengaluru">Bengaluru</option><option value="Other">Other</option></select></div>
+<div class="field"><label for="movementKind">Movement type</label><select id="movementKind"><option value="Bundle">Bundle</option><option value="Direct">Direct</option></select></div>
+</div>
+<div class="field hidden" id="otherCityWrap"><label for="otherCity">Enter city</label><input id="otherCity"></div>
+<div class="step"><span class="step-num">1</span> GRN material lines <span class="hint">Add multiple materials in one receipt</span></div>
+<div class="grn-photo-panel">
+ <strong>📷 Add materials from a photo</strong>
+ <p class="note" style="margin:5px 0 10px">Take a photo or upload a stock list. Detected rows are editable; check every batch and quantity before posting.</p>
+ <div class="grn-photo-actions"><button class="secondary" type="button" id="takeGrnPhoto">📷 Take Photo</button><button class="secondary" type="button" id="chooseGrnGallery">🖼️ Select from Gallery</button><input id="grnCameraInput" type="file" accept="image/*" capture="environment" style="display:none"><input id="grnGalleryInput" type="file" accept="image/*" style="display:none"><button class="secondary" type="button" id="scanGrnPhoto">Detect materials</button><button class="secondary" type="button" id="pasteOcrText">Paste / type text</button></div>
+ <div id="ocrStatus" class="grn-status">Photo recognition loads when internet is available. You can always enter rows manually.</div>
+ <textarea id="ocrText" class="hidden" rows="4" placeholder="Paste recognized text, one material per line…" style="width:100%;margin-top:9px;padding:10px;border:1px solid var(--line);border-radius:10px"></textarea>
+ <button type="button" id="parseOcrText" class="secondary hidden" style="margin-top:8px">Parse text into rows</button>
+</div>
+<div class="grn-labels"><span>Material code</span><span>Colour</span><span>Size</span><span>Batch</span><span>Qty</span><span></span></div>
+<div id="grnLines" class="grn-lines"></div>
+<div class="grn-photo-actions"><button class="secondary" type="button" id="addGrnLine">＋ Add material line</button><button class="secondary" type="button" id="clearGrnLines">Clear lines</button></div>
+<div class="field" style="margin-top:12px"><label for="stockName">Received / entered by (optional)</label><input id="stockName" autocomplete="name" placeholder="Name"></div>
+<p class="note">Post GRN adds every valid row to stock as stock-in. Rack movement is done later from Saved Data. No rack quantity is entered on Home.</p>
+<div style="height:14px"></div><button class="primary" type="submit">✓ Post GRN · Add all stock</button>
+<div class="grn-hidden-legacy"><div class="step"><span class="step-num">1</span> Item & stock</div><div class="row"><div class="field"><label for="thickness">Thickness / Material</label><div class="thickness-entry"><input id="thickness" list="thicknesses"><select id="thicknessPicker" aria-label="Choose saved thickness or material"><option value="">▾</option></select></div><datalist id="thicknesses"><option>3MM</option><option>4MM</option><option>5MM</option><option>6MM</option></datalist></div><div class="field"><label for="colour">Colour</label><input id="colour" list="colours"><datalist id="colours"><option>SILVER</option><option>WHITE</option><option>BLACK</option><option>GREY</option></datalist></div></div><div class="sizes" id="sizes"><button type="button" class="size-btn" data-size="8x4">8x4</button><button type="button" class="size-btn selected" data-size="10x4">10x4</button><button type="button" class="size-btn" data-size="12x4">12x4</button><button type="button" class="size-btn" data-size="Unsized">Unsized</button></div><div class="stock-batch-row"><div class="field"><label for="batch">Batch</label><input id="batch" maxlength="10"></div><div class="field"><label for="qty">Stock qty</label><input id="qty" type="number" min="1" step="1"></div></div><div id="rackInputs"></div><div class="saved-racks" id="rackChips"></div></div>
+</form>
+</div>
+</section>
+<section id="savedView" class="hidden">
+<h1 class="section-title">Saved material movements</h1>
+<div class="summary movement-summary">
+<button type="button" class="stat summary-filter active" data-summary="stock"><small>Stock</small><strong id="statStock">0</strong></button>
+<button type="button" class="stat summary-filter" data-summary="moved"><small>Moved</small><strong id="statMoved">0</strong></button>
+<button type="button" class="stat summary-filter" data-summary="pending"><small>Not moved</small><strong id="statPending">0</strong></button>
+</div>
+<div class="search-wrap"><input id="search" class="search" placeholder="Search material, batch, rack, colour…"><button type="button" id="clearSearch" class="clear-search" aria-label="Clear search">×</button></div>
+<div class="row">
+<div class="field"><label for="filterSize">Size</label><select id="filterSize"><option value="">All sizes</option><option>8x4</option><option>10x4</option><option>12x4</option><option>Unsized</option></select></div>
+<div class="field"><label for="filterStatus" class="status-filter-label">Status <button type="button" id="moreFiltersToggle" class="filter-toggle" aria-expanded="false" aria-controls="moreFiltersPanel" title="Show more filters">▼</button></label><select id="filterStatus"><option value="">All status</option><option value="pending">Pending / Partial</option><option value="complete">Complete</option></select></div>
+</div>
+<div id="moreFiltersPanel" class="hidden">
+<div class="filter-grid">
+ <div class="field"><label for="filterThickness">Thickness / Material</label><select id="filterThickness"><option value="">All materials</option></select></div>
+ <div class="field"><label for="filterColour">Colour (type manually)</label><input id="filterColour" type="text" placeholder="Enter colour"></div>
+ <div class="field"><label for="filterBatch">Batch (type manually)</label><input id="filterBatch" type="text" placeholder="Enter batch"></div>
+ <div class="field"><label for="datePreset">Date range</label><select id="datePreset"><option value="all">All dates</option><option value="today">Today</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option><option value="custom">Custom date</option></select></div>
+ <div class="field" id="customDateFields" style="display:none"><label>Custom date range</label><div class="date-range-row"><div class="field"><label for="filterDateFrom">From</label><input id="filterDateFrom" type="date" aria-label="From date" onclick="this.showPicker?.()"></div><div class="field"><label for="filterDateTo">To</label><input id="filterDateTo" type="date" aria-label="To date" onclick="this.showPicker?.()"></div></div></div>
+ <div class="field"><label for="filterType">Type</label><select id="filterType"><option value="">Plant + Branch</option><option>Plant</option><option>Branch</option></select></div>
+</div>
+<button type="button" class="secondary" id="clearFilters" style="margin:4px 0 12px">Clear all filters</button>
+</div>
+<div id="cards" class="cards"></div>
+<div style="height:12px"></div><button class="secondary" id="exportBtn">⇩ Export CSV</button> <button class="secondary" id="backupBtn">⇩ Backup JSON</button> <button class="secondary" id="importBtn">⇧ Import JSON</button><input type="file" id="importFile" accept=".json,application/json" class="hidden">
+<p class="note">Data is saved in this browser on this phone. Export a backup regularly. Browser storage is not cloud sync and does not automatically share data with other phones.</p>
+</section>
+<section id="inventoryView" class="hidden">
+<h1 class="section-title">Rack Inventory</h1>
+<div class="summary"><div class="stat"><small>Total sheets in racks</small><strong id="invSheets">0</strong></div><div class="stat"><small>Total racks</small><strong id="invRacks">0</strong></div></div>
+<input id="inventorySearch" class="search" placeholder="Search rack, material, batch, size…">
+<div class="row" style="margin:8px 0 12px"><button class="danger" type="button" data-delete-all-data>🗑 Delete All Data</button></div>
+<div id="inventoryList" class="cards"></div>
+<p class="note">Inventory counts sheets currently assigned to rack locations. Stock not yet moved to a rack is not included in rack totals.</p>
+</section>
+<section id="historyView" class="hidden">
+<h1 class="section-title">Stock In / Stock Out History</h1>
+<div class="summary"><button class="stat summary-filter active" data-histfilter="all"><small>All transactions</small><strong id="histAll">0</strong></button><button class="stat summary-filter" data-histfilter="in"><small>Stock In</small><strong id="histIn">0</strong></button><button class="stat summary-filter" data-histfilter="out"><small>Stock Out</small><strong id="histOut">0</strong></button></div>
+<div class="row history-actions" style="margin-bottom:12px"><button id="showStockIn" class="primary history-action active" type="button">＋ Stock In</button><button id="showStockOut" class="primary history-action stock-out-action" type="button">− Stock Out</button></div>
+<div class="search-wrap"><input id="historySearch" class="search" placeholder="Search material, batch, rack, colour…" aria-label="Search stock history"><button id="clearHistorySearch" class="clear-search" type="button" aria-label="Clear search">×</button></div>
+<div class="filter-grid" style="margin:8px 0 12px"><div class="field"><label for="hFilterSize">Size</label><select id="hFilterSize"><option value="">All sizes</option><option>8x4</option><option>10x4</option><option>12x4</option><option>Unsized</option></select></div><div class="field"><label for="hFilterStatus">Status</label><select id="hFilterStatus"><option value="">All status</option><option value="IN">Stock In</option><option value="OUT">Stock Out</option></select></div><div class="field"><label for="hFilterThickness">Thickness / Material</label><select id="hFilterThickness"><option value="">All materials</option></select></div><div class="field"><label for="hFilterColour">Colour</label><input id="hFilterColour" placeholder="Enter colour"></div><div class="field"><label for="hFilterBatch">Batch</label><input id="hFilterBatch" placeholder="Enter batch"></div><div class="field"><label for="hFilterDate">Date range</label><select id="hFilterDate"><option value="all">All dates</option><option value="today">Today</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option><option value="custom">Custom date</option></select></div><div id="hCustomDates" class="field" style="grid-column:1/-1;display:none"><label>Custom from / to</label><div class="date-range-row"><div class="field"><label for="hDateFrom">From</label><input id="hDateFrom" type="date"></div><div class="field"><label for="hDateTo">To</label><input id="hDateTo" type="date"></div></div></div><div class="field"><label for="hFilterType">Type</label><select id="hFilterType"><option value="">Plant + Branch</option><option>Plant</option><option>Branch</option></select></div></div>
+<button id="clearHistoryFilters" class="secondary" type="button" style="margin-bottom:12px">Clear all filters</button>
+<div class="row" style="margin:0 0 12px"><button class="danger" type="button" data-delete-all-data>🗑 Delete All Data</button></div>
+<div id="historyList" class="cards"></div>
+</section>
+<section id="fifoReportView" class="hidden">
+<h1 class="section-title">FIFO Performance Report</h1>
+<p class="note" style="margin:0 0 12px">Based on recorded stock-out transactions and their FIFO status. A higher FIFO-followed rate means better FIFO compliance.</p>
+<div class="panel fifo-report-filters">
+ <div class="field"><label for="fifoPeriod">Report period</label><select id="fifoPeriod"><option value="daily">Daily view · 7 days (Mon–Sun)</option><option value="weekly">Weekly view · one bar per week</option><option value="monthly">Monthly view · one bar per month</option><option value="yearly">Yearly view · one bar per year</option><option value="custom">Custom date range</option></select></div>
+ <div class="filter-grid">
+  <div class="field" id="fifoAnchorWrap"><label for="fifoAnchorDate">Choose a date (shows that week Monday–Sunday)</label><input id="fifoAnchorDate" type="date"></div>
+  <div class="field" id="fifoMonthWrap"><label for="fifoMonth">Month filter</label><input id="fifoMonth" type="month"></div>
+  <div class="field" id="fifoYearWrap"><label for="fifoYear">Year filter</label><select id="fifoYear"><option value="all">All years</option></select></div>
+  <div class="field" id="fifoCustomDatesWrap" style="display:none;grid-column:1/-1"><label>Custom date range</label><div class="date-range-row"><div class="field"><label for="fifoDateFrom">From date</label><input id="fifoDateFrom" type="date"></div><div class="field"><label for="fifoDateTo">To date</label><input id="fifoDateTo" type="date"></div></div></div>
+ </div>
+ <button type="button" class="secondary" id="fifoClearFilters">Clear report filters</button>
+</div>
+<div class="dash-grid fifo-kpis">
+ <div class="dash-stat green"><small>FIFO followed</small><strong id="fifoFollowedCount">0</strong></div>
+ <div class="dash-stat orange"><small>FIFO not followed</small><strong id="fifoNotCount">0</strong></div>
+ <div class="dash-stat blue"><small>FIFO compliance</small><strong id="fifoRate">—</strong></div>
+ <div class="dash-stat purple"><small>Stock-out records checked</small><strong id="fifoChecked">0</strong></div>
+</div>
+<div class="dashboard-panel">
+ <div class="fifo-chart-heading"><h3>FIFO compliance trend</h3><span id="fifoTrendPill" class="trend-pill neutral">No comparison yet</span></div>
+ <p id="fifoTrendText" class="note">Compare FIFO performance over time.</p>
+ <div id="fifoBarChart" class="fifo-bar-chart"></div>
+ <div class="fifo-legend"><span><i class="legend-dot good"></i> FIFO followed</span><span><i class="legend-dot bad"></i> FIFO not followed</span></div>
+</div>
+<div class="dashboard-panel fifo-donut-panel">
+ <h3 style="margin:0 0 8px">Overall FIFO result</h3>
+ <div class="fifo-donut-layout"><div id="fifoDonut" class="fifo-donut"><div class="fifo-donut-hole"><strong id="fifoDonutRate">—</strong><small>followed</small></div></div><div class="fifo-donut-key"><div><i class="legend-dot good"></i><span>Followed</span><strong id="fifoDonutGood">0</strong></div><div><i class="legend-dot bad"></i><span>Not followed</span><strong id="fifoDonutBad">0</strong></div><p id="fifoDonutSummary" class="note">No stock-out history yet.</p></div></div>
+</div>
+<div class="dashboard-panel"><h3 style="margin:0 0 8px">Period-by-period details</h3><div id="fifoPeriodTable"></div></div>
+<button type="button" class="secondary" id="fifoGoHistory">◷ Open Stock-Out History</button>
+</section>
+<section id="dashboardView" class="hidden">
+<h1 class="section-title">Warehouse Dashboard</h1>
+<div class="dash-grid">
+<div class="dash-stat blue"><small>Total stock sheets</small><strong id="dashStock">0</strong></div>
+<div class="dash-stat green"><small>Sheets in racks</small><strong id="dashMoved">0</strong></div>
+<div class="dash-stat orange"><small>Not moved / balance</small><strong id="dashPending">0</strong></div>
+<div class="dash-stat purple"><small>Active rack locations</small><strong id="dashRacks">0</strong></div>
+</div>
+<div class="dashboard-panel"><h3 style="margin:0 0 6px">Stock overview by size</h3><div id="dashSizes"></div></div>
+
+<div class="dashboard-panel rank-panel"><h3>🏆 Most Stock-In Material</h3><p class="note">Ranked by recorded stock-in quantity.</p><div id="dashTopIn"></div></div>
+<div class="dashboard-panel rank-panel"><h3>🚚 Most Dispatched Material</h3><p class="note">Ranked by recorded stock-out quantity.</p><div id="dashTopOut"></div></div>
+<div class="dashboard-panel rank-panel"><h3>📥 Most Used Rack — Stock In</h3><p class="note">Uses recorded rack movement history where available; older records without movement history are not counted as historical stock-in.</p><div id="dashRackIn"></div></div>
+<div class="dashboard-panel rank-panel"><h3>📤 Most Used Rack — Stock Out</h3><p class="note">Ranked by recorded stock-out quantity by rack.</p><div id="dashRackOut"></div></div>
+<button class="secondary" type="button" id="dashGoInventory">▦ Open Inventory</button> <button class="secondary" type="button" id="dashGoHistory">◷ Open History</button>
+<div style="height:12px"></div><button class="danger" type="button" data-delete-all-data>🗑 Delete All Data</button>
+</section>
+</main>
+<nav class="bottom"><button class="active" data-view="home">⌂<br>Home</button><button data-view="saved">▱<br>Saved Data</button><button data-view="inventory">▦<br>Inventory</button><button data-view="history">◷<br>History</button><button data-view="dashboard">▥<br>Dashboard</button></nav>
+<div id="toast" class="toast hidden" role="status"></div>
+<div id="cloudSyncStatus" style="position:fixed;right:10px;bottom:78px;z-index:20;background:#e7f7ee;color:#11633b;border:1px solid #a7dfbd;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:700;box-shadow:0 2px 8px #0001">☁ Connecting to cloud…</div>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+<script>
+// Firebase live sync for ACP Material Tracker. Public write access is configured separately in Firebase Rules.
+const firebaseConfig = {
+  apiKey: "AIzaSyAEiJRd5zwP_p5L02ST0NG1AyW9koRp07I",
+  authDomain: "acp-material-tracker.firebaseapp.com",
+  databaseURL: "https://acp-material-tracker-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "acp-material-tracker",
+  storageBucket: "acp-material-tracker.firebasestorage.app",
+  messagingSenderId: "224710651188",
+  appId: "1:224710651188:web:919059f0756bfb379fc961",
+  measurementId: "G-WJ2K8992XL"
+};
+let firebaseDb = null, firebaseSyncReady = false, applyingRemoteData = false, firebaseSyncTimer = null;
+const nativeStorageSetItem = Storage.prototype.setItem;
+try {
+  firebase.initializeApp(firebaseConfig);
+  firebaseDb = firebase.database();
+} catch (e) { console.error('Firebase initialization failed:', e); }
+function scheduleFirebaseSync() {
+  if (!firebaseDb || !firebaseSyncReady || applyingRemoteData) return;
+  clearTimeout(firebaseSyncTimer);
+  firebaseSyncTimer = setTimeout(async () => {
+    try {
+      const payload = {
+        records: JSON.parse(localStorage.getItem('acpMaterialMovementTracker_v1') || '[]'),
+        transactions: JSON.parse(localStorage.getItem('acpMaterialMovementTracker_transactions_v1') || '[]'),
+        updatedAt: new Date().toISOString()
+      };
+      await firebaseDb.ref('tracker').set(payload);
+      const status = document.getElementById('cloudSyncStatus');
+      if (status) status.textContent = '☁ Live sync connected';
+    } catch (e) {
+      console.error('Firebase sync failed:', e);
+      const status = document.getElementById('cloudSyncStatus');
+      if (status) status.textContent = '⚠ Cloud sync blocked — check Firebase Rules/internet';
+    }
+  }, 250);
+}
+Storage.prototype.setItem = function(key, value) {
+  nativeStorageSetItem.call(this, key, value);
+  if (key === 'acpMaterialMovementTracker_v1' || key === 'acpMaterialMovementTracker_transactions_v1') scheduleFirebaseSync();
+};
+const $=id=>document.getElementById(id);
+const STORAGE_KEY='acpMaterialMovementTracker_v1';
+let records=[], selectedSize='10x4', editId=null, rackDraft=[{rack:'',qty:''}], summaryFilter='stock', historyFilter='all', transactions=[];
+const openInventoryRacks=new Set();
+const TX_KEY='acpMaterialMovementTracker_transactions_v1';
+try{transactions=JSON.parse(localStorage.getItem(TX_KEY)||'[]');if(!Array.isArray(transactions))transactions=[]}catch(e){transactions=[]}
+function saveTransactions(){localStorage.setItem(TX_KEY,JSON.stringify(transactions))}
+function syncTransactionsForRecord(r){
+ const meta={material:materialLabel(r),batch:r.batch,size:r.size,thickness:r.thickness,colour:r.colour,plantType:r.type||'Plant',city:r.city||'',movementKind:r.movementKind||'',name:r.name||''};
+ transactions=transactions.map(t=>{if(t.recordId!==r.id)return t;const next={...t,...meta};if(t.type==='IN'&&(!t.note||/initial stock entry|existing record/i.test(t.note))){next.qty=Number(r.qty)||0;next.date=r.date||t.date;}return next});
+}
+function renderAllViews(){renderCards();renderInventory();renderHistory();renderDashboard();renderFifoReport()}
+function materialLabel(r){return `${r.thickness} · ${r.colour} · ${r.size} · Batch ${r.batch}`}
+function fifoKey(r){return [r.thickness,r.colour,r.size].map(v=>String(v||'').trim().toUpperCase()).join('|')}
+function fifoRankForRecord(r){
+ // Rank only batches that still have stock. Once a batch is exhausted it no longer occupies an F-number.
+ if(Number(r.qty||0)<=0)return null;
+ const peers=records.filter(x=>fifoKey(x)===fifoKey(r)&&Number(x.qty||0)>0).slice().sort((a,b)=>{
+  const da=String(a.date||'9999-12-31'),db=String(b.date||'9999-12-31');
+  if(da!==db)return da.localeCompare(db);
+  const ta=String(a.createdAt||a.id||a.batch||''),tb=String(b.createdAt||b.id||b.batch||'');
+  return ta.localeCompare(tb,undefined,{numeric:true})||String(a.batch||'').localeCompare(String(b.batch||''));
+ });
+ const index=peers.findIndex(x=>x.id===r.id);
+ return index<0?null:index+1;
+}
+function fifoBadge(r){const rank=fifoRankForRecord(r);if(!rank)return '';const cls=rank===1?'':rank===2?'fifo-rank-2':rank===3?'fifo-rank-3':'fifo-rank-later';return `<span class=\"fifo-rank ${cls}\" title=\"FIFO priority ${rank}; based on stock-in date for same thickness, colour and size\">F${rank}</span>`}
+function fifoStatusForIssue(r){
+ const key=x=>[x.thickness,x.colour,x.size].map(v=>String(v||'').trim().toUpperCase()).join('|');
+ const currentDate=String(r.date||'9999-12-31');
+ const olderAvailable=records.some(other=>other.id!==r.id&&key(other)===key(r)&&Number(other.qty)>0&&String(other.date||'9999-12-31')<currentDate);
+ return olderAvailable?'NOT FOLLOWED':'FOLLOWED';
+}
+function recomputeSameDayFifoStatuses(date, key){
+ // If a later-priority batch was issued first, but all older batches of the same
+ // thickness/colour/size are fully exhausted by the end of that same delivery day,
+ // mark that day's issues as FIFO FOLLOWED. Do not rewrite earlier dates.
+ const dayIssues=transactions.filter(t=>t.type==='OUT'&&String(t.date||'')===String(date)&&fifoKey(t)===key);
+ if(!dayIssues.length)return;
+ const byRecord=new Map();
+ for(const t of transactions){
+  if(!t.recordId||fifoKey(t)!==key)continue;
+  if(!byRecord.has(t.recordId))byRecord.set(t.recordId,[]);
+  byRecord.get(t.recordId).push(t);
+ }
+ const older=[];
+ for(const [recordId,items] of byRecord){
+  const ins=items.filter(t=>t.type==='IN').sort((a,b)=>String(a.date||'9999-12-31').localeCompare(String(b.date||'9999-12-31'))||String(a.createdAt||'').localeCompare(String(b.createdAt||'')));
+  if(!ins.length)continue;
+  const firstIn=ins[0];
+  if(String(firstIn.date||'9999-12-31')>=String(date))continue;
+  const balanceAtDayEnd=items.reduce((sum,t)=>{
+   if(String(t.date||'9999-12-31')>String(date))return sum;
+   return sum+(t.type==='IN'?Number(t.qty||0):t.type==='OUT'?-Number(t.qty||0):0);
+  },0);
+  older.push({recordId,balance:balanceAtDayEnd});
+ }
+ // Only retroactively change status when there is known older stock and every older
+ // batch is exhausted by the end of this same date. Otherwise keep the warning.
+ if(older.length&&older.every(x=>x.balance<=0)){
+  for(const t of dayIssues)t.fifoStatus='FOLLOWED';
+  saveTransactions();
+ }
+}
+function addTransaction(type,r,qty,date,note='',rack='',eventTime=''){
+ const fifoStatus=type==='OUT'?fifoStatusForIssue(r):'';
+ transactions.unshift({id:'t'+Date.now()+Math.random().toString(16).slice(2,5),type,recordId:r.id,material:materialLabel(r),batch:r.batch,size:r.size,thickness:r.thickness,colour:r.colour,qty:Number(qty),date:date||new Date().toISOString().slice(0,10),note,rack,plantType:r.type||'Plant',city:r.city||'',movementKind:r.movementKind||'',name:r.name||'',fifoStatus,createdAt:eventTime||new Date().toISOString()});saveTransactions()
+}
+const today=new Date(); $('date').value=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
+try{records=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');if(!Array.isArray(records))records=[]}catch(e){records=[]}
+if (firebaseDb) {
+  firebaseDb.ref('tracker').on('value', snapshot => {
+    const cloud = snapshot.val();
+    if (!cloud) {
+      // First device seeds an empty cloud database from its existing local records.
+      firebaseSyncReady = true;
+      if (records.length || transactions.length) scheduleFirebaseSync();
+      const status = $('cloudSyncStatus'); if (status) status.textContent = '☁ Initializing shared data…';
+      return;
+    }
+    applyingRemoteData = true;
+    try {
+      const cloudRecords = Array.isArray(cloud.records) ? cloud.records : [];
+      const cloudTransactions = Array.isArray(cloud.transactions) ? cloud.transactions : [];
+      nativeStorageSetItem.call(localStorage, STORAGE_KEY, JSON.stringify(cloudRecords));
+      nativeStorageSetItem.call(localStorage, TX_KEY, JSON.stringify(cloudTransactions));
+      records = cloudRecords; transactions = cloudTransactions;
+      renderAllViews();
+      firebaseSyncReady = true;
+      const status = $('cloudSyncStatus'); if (status) status.textContent = '☁ Live sync connected';
+    } finally { applyingRemoteData = false; }
+  }, error => {
+    console.error('Firebase read failed:', error);
+    const status = $('cloudSyncStatus'); if (status) status.textContent = '⚠ Cloud sync blocked — check Firebase Rules';
+  });
+} else {
+  const status = $('cloudSyncStatus'); if (status) status.textContent = '⚠ Firebase could not initialize';
+}
+function persist(){localStorage.setItem(STORAGE_KEY,JSON.stringify(records));records.forEach(syncTransactionsForRecord);saveTransactions();renderAllViews()}
+function toast(msg){$('toast').textContent=msg;$('toast').classList.remove('hidden');setTimeout(()=>$('toast').classList.add('hidden'),2600)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function moved(r){return (r.racks||[]).reduce((n,x)=>n+Number(x.qty||0),0)}
+function balance(r){return Math.max(0,Number(r.qty)-moved(r))}
+function status(r){return balance(r)===0?'complete':moved(r)>0?'partial':'pending'}
+function resetForm(){editId=null;$('stockForm').reset();$('branchDetails').style.display='none';$('otherCityWrap').classList.add('hidden');$('date').value=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');selectedSize='10x4';document.querySelectorAll('.size-btn').forEach(b=>b.classList.toggle('selected',b.dataset.size===selectedSize));rackDraft=[{rack:'',qty:''}];renderRackInputs();$('stockForm').querySelector('button[type=submit]').textContent='✓ Save data';}
+function renderRackInputs(){
+ const root=$('rackInputs');root.innerHTML='';
+ rackDraft.forEach((r,i)=>{const row=document.createElement('div');row.className='rack-row';row.innerHTML=`<div class="field"><label>Moved rack location</label><input data-rack="${i}" data-key="rack" value="${esc(r.rack)}"></div><div class="field"><label>Qty (sheet)</label><input data-rack="${i}" data-key="qty" type="number" min="1" step="1" value="${esc(r.qty)}"></div><button type="button" class="rack-control add-rack" data-add-after="${i}" aria-label="Add another rack">+</button><button type="button" class="rack-control remove-rack" data-remove="${i}" aria-label="Remove this rack">−</button>`;root.appendChild(row)});
+ root.querySelectorAll('[data-rack]').forEach(el=>el.addEventListener('input',()=>{const i=+el.dataset.rack;rackDraft[i][el.dataset.key]=el.dataset.key==='qty'?el.value:(el.dataset.key==='rack'?el.value.toUpperCase():el.value.trim())}));
+ root.querySelectorAll('[data-add-after]').forEach(b=>b.addEventListener('click',()=>{const ni=Number(b.dataset.addAfter)+1;rackDraft.splice(ni,0,{rack:'',qty:''});renderRackInputs();const next=root.querySelector(`[data-rack="${ni}"][data-key="rack"]`);if(next){next.focus({preventScroll:true});setTimeout(()=>{next.closest('.rack-row')?.scrollIntoView({behavior:'smooth',block:'center'});next.focus({preventScroll:true})},120)}}));
+ root.querySelectorAll('[data-remove]').forEach(b=>b.addEventListener('click',()=>{if(rackDraft.length===1){rackDraft[0]={rack:'',qty:''}}else rackDraft.splice(+b.dataset.remove,1);renderRackInputs()}));
+}
+function updateTypeFields(){
+ const isBranch=$('type').value==='Branch';
+ $('branchDetails').style.display=isBranch?'flex':'none';
+ if(!isBranch)$('otherCityWrap').classList.add('hidden');
+}
+$('type').addEventListener('change',updateTypeFields);
+$('city').addEventListener('change',()=>{const show=$('city').value==='Other';$('otherCityWrap').classList.toggle('hidden',!show);if(show){setTimeout(()=>{$('otherCity').focus({preventScroll:true});$('otherCity').scrollIntoView({behavior:'smooth',block:'center'})},100)}});
+
+document.querySelectorAll('.size-btn').forEach(b=>b.addEventListener('click',()=>{selectedSize=b.dataset.size;document.querySelectorAll('.size-btn').forEach(x=>x.classList.toggle('selected',x===b))}));
+$('rackChips').innerHTML='<span class="hint">Recently used racks:</span>';
+function setView(view){['home','saved','inventory','history','dashboard','fifoReport'].forEach(v=>$(v+'View').classList.toggle('hidden',v!==view));document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));if(view==='saved')renderCards();if(view==='inventory')renderInventory();if(view==='history')renderHistory();if(view==='dashboard')renderDashboard();if(view==='fifoReport')renderFifoReport();$('sideMenu').classList.add('hidden');$('menuBtn').setAttribute('aria-expanded','false');window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+['thickness','colour','batch','otherCity'].forEach(id=>$(id).addEventListener('input',()=>{const el=$(id);const start=el.selectionStart;el.value=el.value.toUpperCase();try{el.setSelectionRange(start,start)}catch(e){}}));
+function addGrnRow(data={}){
+ const root=$('grnLines');const row=document.createElement('div');row.className='grn-line';
+ row.innerHTML=`<div class="field"><input data-grn="material" aria-label="Material code" placeholder="AL3C AD01" value="${esc(data.material||'')}" required></div><div class="field"><input data-grn="colour" aria-label="Colour" placeholder="Colour" value="${esc(data.colour||'')}" required></div><div class="field"><select data-grn="size" aria-label="Size"><option ${(!data.size||data.size==='8x4')?'selected':''}>8x4</option><option ${data.size==='10x4'?'selected':''}>10x4</option><option ${data.size==='12x4'?'selected':''}>12x4</option><option ${data.size==='Unsized'?'selected':''}>Unsized</option></select></div><div class="field"><input data-grn="batch" aria-label="Batch" placeholder="Batch" maxlength="10" value="${esc(data.batch||'')}" required></div><div class="field"><input data-grn="qty" aria-label="Quantity" type="number" min="1" step="1" placeholder="Qty" value="${esc(data.qty??'')}" required></div><button class="remove-line" type="button" aria-label="Remove material line">−</button>`;
+ root.appendChild(row);row.querySelectorAll('input').forEach(i=>i.addEventListener('input',()=>{if(i.dataset.grn==='qty')return;const pos=i.selectionStart;i.value=i.value.toUpperCase();try{i.setSelectionRange(pos,pos)}catch(e){}}));row.querySelector('.remove-line').addEventListener('click',()=>{row.remove();if(!root.children.length)addGrnRow()});
+}
+function readGrnRows(){return [...$('grnLines').querySelectorAll('.grn-line')].map(row=>{const v={};row.querySelectorAll('[data-grn]').forEach(el=>v[el.dataset.grn]=el.value.trim());return v}).filter(v=>v.material||v.batch||v.qty)}
+$('addGrnLine').addEventListener('click',()=>addGrnRow());$('clearGrnLines').addEventListener('click',()=>{$('grnLines').innerHTML='';addGrnRow()});addGrnRow();
+function parseGrnText(text){
+ const lines=text.split(/\n+/).map(x=>x.trim()).filter(Boolean),out=[];
+ for(const line of lines){
+  const sizeMatch=line.match(/\b(8\s*x\s*4|10\s*x\s*4|12\s*x\s*4|unsized)\b/i);const qtyMatches=[...line.matchAll(/(?:qty\s*[:=-]?\s*)?(\d+)\s*(?:qty|sheets?|pcs?)?\b/ig)];
+  const qty=qtyMatches.length?qtyMatches[qtyMatches.length-1][1]:'';const batchMatch=line.match(/\bbatch\s*[:=-]?\s*([a-z0-9_-]{3,})/i);
+  let batch=batchMatch?batchMatch[1]:'';if(!batch){const tokens=line.match(/[A-Z0-9_-]{6,}/ig)||[];batch=tokens.length?tokens[tokens.length-1]:''}
+  const beforeSize=sizeMatch?line.slice(0,sizeMatch.index):line;const tokens=(beforeSize.match(/[A-Z][A-Z0-9_-]*/ig)||[]).filter(t=>!/^BATCH$/i.test(t));
+  const material=tokens[0]||'';
+  const colourMatch=line.match(/\b(silver|white|black|grey|gray|red|blue|green|gold|brown|ivory|cream|champagne|wood|mirror)\b/i);
+  const colour=colourMatch?colourMatch[0].toUpperCase():(tokens.length>1?tokens[1]:'');
+  if(material&&colour&&batch&&qty&&Number(qty)>0)out.push({material,colour,size:sizeMatch?sizeMatch[1].replace(/\s/g,'').toLowerCase():'8x4',batch,qty});
+ }
+ return out;
+}
+let selectedGrnPhoto=null;
+$('takeGrnPhoto').addEventListener('click',()=>$('grnCameraInput').click());
+$('chooseGrnGallery').addEventListener('click',()=>$('grnGalleryInput').click());
+function setGrnPhoto(file){if(!file)return;selectedGrnPhoto=file;$('ocrStatus').textContent=`Selected photo: ${file.name||'camera image'}. Tap Detect materials to read it.`;}
+$('grnCameraInput').addEventListener('change',e=>setGrnPhoto(e.target.files&&e.target.files[0]));
+$('grnGalleryInput').addEventListener('change',e=>setGrnPhoto(e.target.files&&e.target.files[0]));
+$('pasteOcrText').addEventListener('click',()=>{$('ocrText').classList.toggle('hidden');$('parseOcrText').classList.toggle('hidden');$('ocrText').focus()});
+$('parseOcrText').addEventListener('click',()=>{const rows=parseGrnText($('ocrText').value);if(!rows.length){toast('Could not identify complete rows. Enter or correct them manually.');return}$('grnLines').innerHTML='';rows.forEach(addGrnRow);$('ocrStatus').textContent=`Detected ${rows.length} row(s) from text. Review all fields before posting.`});
+$('scanGrnPhoto').addEventListener('click',async()=>{
+ const file=selectedGrnPhoto;if(!file){toast('Tap Take Photo or Select from Gallery first.');return}
+ if(location.protocol!=='https:' && location.protocol!=='http:'){ $('ocrStatus').textContent='Photo is selected, but OCR cannot run from a downloaded content:// or file:// HTML page. Chrome blocks the OCR worker in this mode. Open this same app from an HTTPS website (or use a native app with bundled OCR). Manual entry and Paste / type text still work here.'; toast('OCR needs an HTTPS website; this downloaded HTML cannot start the worker.'); return; }
+ $('scanGrnPhoto').disabled=true;$('ocrStatus').textContent='Loading OCR engine… keep this page open and make sure internet is connected.';
+ try{
+  if(!window.Tesseract){
+   const urls=['https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js','https://unpkg.com/tesseract.js@5/dist/tesseract.min.js'];
+   let loaded=false;
+   for(const url of urls){try{await new Promise((resolve,reject)=>{const sc=document.createElement('script');sc.src=url;sc.onload=resolve;sc.onerror=()=>{sc.remove();reject(new Error('Could not load '+url))};document.head.appendChild(sc)});if(window.Tesseract){loaded=true;break}}catch(e){}}
+   if(!loaded)throw new Error('OCR engine could not load from either CDN. This usually means the phone is offline or the browser blocks external scripts from this local HTML file.');
+  }
+  $('ocrStatus').textContent='Downloading OCR language/model and reading photo… first scan may take time.';
+  const result=await Tesseract.recognize(file,'eng',{
+   logger:m=>{if(m&&m.status){const pct=typeof m.progress==='number'?` ${Math.round(m.progress*100)}%`:'';$('ocrStatus').textContent=m.status+pct+' — keep this page open.'}},
+   workerPath:'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/worker.min.js',
+   corePath:'https://cdn.jsdelivr.net/npm/tesseract.js-core@5/tesseract-core-simd-lstm.wasm.js',
+   langPath:'https://tessdata.projectnaptha.com/4.0.0'
+  });
+  $('ocrText').value=(result.data&&result.data.text)||'';const rows=parseGrnText($('ocrText').value);
+  if(rows.length){$('grnLines').innerHTML='';rows.forEach(addGrnRow);$('ocrStatus').textContent=`Detected ${rows.length} possible material row(s). OCR can misread ACP codes and quantities—review every field before Post GRN.`}
+  else{$('ocrText').classList.remove('hidden');$('parseOcrText').classList.remove('hidden');$('ocrStatus').textContent='OCR finished but could not confidently split the text into material rows. Review/edit the recognized text, tap Parse text into rows, then verify every field.'}
+ }catch(err){console.error('GRN photo OCR failed:',err);$('ocrStatus').textContent='OCR could not start. If this app is hosted on HTTPS, check internet access to the OCR engine, worker, WASM core and English language data. For a downloaded content:// HTML file, use HTTPS hosting or a native app with OCR bundled locally.';toast('OCR could not start. Check HTTPS hosting and internet.');}
+ finally{$('scanGrnPhoto').disabled=false}
+});
+$('stockForm').addEventListener('submit',e=>{
+ e.preventDefault();const rows=readGrnRows();if(!rows.length){toast('Add at least one material line.');return}
+ for(let i=0;i<rows.length;i++){const r=rows[i];if(!r.material||!r.colour||!r.batch||!Number.isInteger(Number(r.qty))||Number(r.qty)<1){toast(`Check material line ${i+1}: material, colour, batch and whole-number qty are required.`);return}if(r.batch.length>10){toast(`Batch in line ${i+1} must be 10 characters or fewer.`);return}}
+ const type=$('type').value,city=type==='Branch'?($('city').value==='Other'?$('otherCity').value.trim():$('city').value):'',movementKind=type==='Branch'?$('movementKind').value:'';
+ const date=$('date').value||new Date().toISOString().slice(0,10),name=$('stockName').value.trim(),now=new Date().toISOString();
+ try{for(const line of rows){const item={id:'m'+Date.now()+Math.random().toString(16).slice(2,7),date,type,city,movementKind,thickness:line.material.toUpperCase(),colour:line.colour.toUpperCase(),size:line.size,batch:line.batch.toUpperCase(),qty:Number(line.qty),name,racks:[],createdAt:now};records.unshift(item);addTransaction('IN',item,item.qty,date,'GRN stock-in','',''+now)}localStorage.setItem(STORAGE_KEY,JSON.stringify(records));saveTransactions()}catch(err){toast('Could not save GRN. Browser storage may be full.');return}
+ $('grnLines').innerHTML='';addGrnRow();$('stockName').value='';$('ocrText').value='';selectedGrnPhoto=null;$('grnCameraInput').value='';$('grnGalleryInput').value='';$('ocrStatus').textContent='GRN posted. Add another photo or enter the next receipt.';toast(`${rows.length} material line(s) posted to stock.`);setView('saved');renderAllViews();
+});
+function colorFor(c){const x=(c||'').toLowerCase();if(x.includes('silver')||x.includes('grey')||x.includes('gray'))return '#9ca3af';if(x.includes('white'))return '#fff';if(x.includes('black'))return '#262626';if(x.includes('red'))return '#ef4444';if(x.includes('blue'))return '#2563eb';if(x.includes('green'))return '#16a34a';if(x.includes('gold')||x.includes('yellow'))return '#eab308';if(x.includes('brown'))return '#92400e';return '#a3a3a3'}
+function refreshMaterialPickers(){
+ const unique=(key)=>[...new Set(records.map(r=>(r[key]||'').trim().toUpperCase()).filter(Boolean))].sort();
+ const thicknesses=unique('thickness'), colours=unique('colour'), batches=unique('batch');
+ const dl=$('thicknesses'); if(dl){const base=['3MM','4MM','5MM','6MM'];dl.innerHTML=[...new Set([...base,...thicknesses])].map(v=>`<option value="${esc(v)}"></option>`).join('')}
+ const picker=$('thicknessPicker');if(picker){const old=picker.value;picker.innerHTML='<option value="">▾</option>'+thicknesses.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('');picker.value=thicknesses.includes(old)?old:''}
+ [['filterThickness',thicknesses,'All materials']].forEach(([id,vals,label])=>{const el=$(id),old=el.value;el.innerHTML=`<option value="">${label}</option>`+vals.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('');if(vals.includes(old))el.value=old});
+}
+function renderCards(){
+ refreshMaterialPickers();
+ const q=$('search').value.toLowerCase(),fs=$('filterSize').value,st=$('filterStatus').value,ft=$('filterThickness').value,fc=$('filterColour').value.trim().toLowerCase(),fb=$('filterBatch').value.trim().toLowerCase(),fty=$('filterType').value,preset=$('datePreset').value,from=$('filterDateFrom').value,to=$('filterDateTo').value;
+ const now=new Date();now.setHours(0,0,0,0);const start7=new Date(now);start7.setDate(now.getDate()-6);const start30=new Date(now);start30.setDate(now.getDate()-29);
+ const inRange=(date)=>{if(!date||preset==='all')return true;const d=new Date(date+'T00:00:00');if(Number.isNaN(d.getTime()))return false;if(preset==='today')return d.getTime()===now.getTime();if(preset==='7')return d>=start7&&d<=now;if(preset==='30')return d>=start30&&d<=now;if(preset==='custom')return (!from||date>=from)&&(!to||date<=to);return true};
+ const filtered=records.filter(r=>{const hay=[r.thickness,r.colour,r.size,r.batch,r.type,r.city,r.movementKind,r.date,...(r.racks||[]).map(x=>x.rack)].join(' ').toLowerCase();const summaryOk=summaryFilter==='stock'||(summaryFilter==='moved'?moved(r)>0:balance(r)>0);return hay.includes(q)&&(!fs||r.size===fs)&&(!st||(st==='complete'?status(r)==='complete':status(r)!=='complete'))&&(!ft||r.thickness.toUpperCase()===ft)&&(!fc||r.colour.toLowerCase().includes(fc))&&(!fb||r.batch.toLowerCase().includes(fb))&&inRange(r.date)&&(!fty||r.type===fty)&&summaryOk});
+ $('statStock').textContent=records.reduce((n,r)=>n+Number(r.qty),0);$('statMoved').textContent=records.reduce((n,r)=>n+moved(r),0);$('statPending').textContent=records.reduce((n,r)=>n+balance(r),0);
+ document.querySelectorAll('[data-summary]').forEach(b=>b.classList.toggle('active',b.dataset.summary===summaryFilter));
+ const root=$('cards');root.innerHTML='';
+ if(!filtered.length){root.innerHTML='<div class="empty">No saved materials found. Add stock from the Home tab, then save it.</div>';return}
+ filtered.forEach(r=>{
+  const m=moved(r),bal=balance(r),complete=bal===0,stText=complete?'MOVEMENT COMPLETE':m>0?'PARTIALLY MOVED':'NOT MOVED';
+  const racks=(r.racks||[]).map((x,i)=>({x,i})).filter(v=>Number(v.x.qty||0)>0).map(({x,i})=>`<button type="button" class="rack-box rack-detail-trigger" data-rack-record="${r.id}" data-rack-index="${i}" title="Tap to view movement date and time"><span class="rack-code">⌂ &nbsp;${esc(x.rack)}</span><span class="rack-qty">${x.qty}</span></button>`).join('');
+  const card=document.createElement('article');card.className='material-card';card.innerHTML=`<div class="card-top"><span class="swatch" style="background:${colorFor(r.colour)}"></span><span class="swatch" style="background:#00c853"></span><div class="material-name">${esc(r.thickness)} · ${esc(r.colour)}</div><span class="tag">${esc(r.size)}</span>${fifoBadge(r)}<span class="tag branch">${esc(r.type)}</span></div><div class="meta"><span>▤ Batch: <b>${esc(r.batch)}</b></span>${r.name?`<span>👤 Name: <b>${esc(r.name)}</b></span>`:''}<span>📍 ${esc(r.type==='Branch'?(r.city||'Branch'):'Plant')}${r.type==='Branch'?' · '+esc(r.movementKind||'Bundle'):''}</span><span class="stock-total">▱ Stock: <b>${r.qty}</b></span></div><div class="meta"><span>Moved (Rack · Qty)</span><span class="stock-total">${esc(r.date)}</span></div><div class="rack-grid">${racks||'<span class="hint">No rack movement recorded</span>'}</div><div class="status-row ${complete?'complete':'pending'}" role="button" tabindex="0" data-stockout-open="${r.id}" title="Tap to stock out sheets not yet assigned to a rack"><span class="status-main">${complete?'✓':m>0?'◷':'!'} &nbsp;${stText}${bal>0?' · TAP TO STOCK OUT':''}</span><span class="status-count">Moved: <strong>${m}</strong> / ${r.qty}${bal?`<br><span style="color:#c2410c">Balance: ${bal}</span>`:''}</span></div><div class="card-actions"><button data-edit="${r.id}">✎ Edit</button><button data-move="${r.id}">＋ Add / Move rack</button><button type="button" data-history-details="${r.id}" title="View full stock-in, rack movement and stock-out history">◷ Details</button><button data-delete="${r.id}" class="danger">Delete</button></div>`;
+  root.appendChild(card)
+ });
+ root.querySelectorAll('[data-edit]').forEach(b=>b.addEventListener('click',()=>editRecord(b.dataset.edit)));
+ root.querySelectorAll('[data-move]').forEach(b=>b.addEventListener('click',()=>addMovement(b.dataset.move)));
+ root.querySelectorAll('[data-history-details]').forEach(b=>b.addEventListener('click',()=>toggleMaterialAudit(b.dataset.historyDetails,b))); 
+ root.querySelectorAll('[data-stockout-open]').forEach(b=>{const open=()=>toggleUnmovedStockOut(b.dataset.stockoutOpen,b.closest('.material-card'));b.addEventListener('click',open);if(b.classList.contains('status-row'))b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}})});
+ root.querySelectorAll('[data-delete]').forEach(b=>b.addEventListener('click',()=>deleteRecord(b.dataset.delete)));
+ root.querySelectorAll('[data-rack-record]').forEach(b=>b.addEventListener('click',()=>{
+  const rr=records.find(x=>x.id===b.dataset.rackRecord),ix=Number(b.dataset.rackIndex),rack=rr?.racks?.[ix];if(!rack)return;
+  const card=b.closest('.material-card');let panel=card.querySelector('.rack-history-panel');if(panel){panel.remove();return}
+  panel=document.createElement('div');panel.className='rack-history-panel';panel.style.cssText='margin-top:8px;padding:10px 12px;border-radius:12px;background:#eef8ff;border:1px solid #9ccfe8;color:#17384a';
+  const timestamp=rack.movedAt?new Date(rack.movedAt).toLocaleString():'Not recorded for this older movement';
+  const nowLocal=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')+'T'+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')};
+  panel.innerHTML=`<b>Rack ${esc(rack.rack)} movement details</b><div>Total currently in rack: <b class="rack-current-qty">${Number(rack.qty)}</b> sheets</div><div>Responsible name: <b>${esc(rack.name||'Not entered')}</b></div><div class="hint">Last movement date/time: ${esc(timestamp)}</div><div style="margin-top:10px;padding:10px;border-radius:10px;background:#fff1df;border:1px solid #fed7aa"><b style="color:#b45309">STOCK OUT</b><div class="row" style="margin-top:8px;align-items:end"><div class="field" style="margin:0"><label>Date &amp; time</label><input class="rack-out-time" type="datetime-local" value="${nowLocal()}"></div><div class="field" style="margin:0;max-width:105px"><label>Qty</label><input class="rack-out-qty" type="number" min="1" max="${Number(rack.qty)}" step="1" placeholder="Qty"></div></div><button type="button" class="rack-stock-out" style="margin-top:9px;background:#b91c1c;color:#fff;padding:10px 14px;border-radius:9px;font-weight:850">Stock Out</button></div><button type="button" class="rack-history-close" style="margin-top:8px;background:#e7f2f8;padding:7px 10px;border-radius:8px">Close details</button>`;
+  b.closest('.rack-grid').insertAdjacentElement('afterend',panel);
+  panel.querySelector('.rack-history-close').addEventListener('click',()=>panel.remove());
+  panel.querySelector('.rack-stock-out').addEventListener('click',()=>{
+   const currentRecord=records.find(x=>x.id===rr.id),currentRack=currentRecord?.racks?.find(x=>String(x.rack).toUpperCase()===String(rack.rack).toUpperCase());
+   const qty=Number(panel.querySelector('.rack-out-qty').value),dt=panel.querySelector('.rack-out-time').value;
+   if(!currentRecord||!currentRack){toast('Rack record not found.');return}
+   if(!Number.isInteger(qty)||qty<1){toast('Enter a valid stock-out quantity.');return}
+   if(qty>Number(currentRack.qty)){toast(`Only ${Number(currentRack.qty)} sheets are in rack ${currentRack.rack}.`);return}
+   if(qty>Number(currentRecord.qty)){toast(`Only ${Number(currentRecord.qty)} sheets remain in this material record.`);return}
+   const movedAt=dt?new Date(dt).toISOString():new Date().toISOString();
+   currentRack.qty=Number(currentRack.qty)-qty;currentRack.history=currentRack.history||[];currentRack.history.push({type:'OUT',qty:-qty,dateTime:movedAt,remaining:Number(currentRack.qty)});currentRack.movedAt=movedAt;
+   currentRecord.qty=Math.max(0,Number(currentRecord.qty)-qty);
+   const issueDate=dt?dt.slice(0,10):[new Date(movedAt).getFullYear(),String(new Date(movedAt).getMonth()+1).padStart(2,'0'),String(new Date(movedAt).getDate()).padStart(2,'0')].join('-');
+   addTransaction('OUT',currentRecord,qty,issueDate,`Stock out from rack ${currentRack.rack} · ${new Date(movedAt).toLocaleString()}`,currentRack.rack,movedAt);
+   recomputeSameDayFifoStatuses(issueDate,fifoKey(currentRecord));
+   // Remove an exhausted material from active Saved Data/Inventory, but preserve its transaction history.
+   const exhausted=Number(currentRecord.qty)<=0&&(currentRecord.racks||[]).every(x=>Number(x.qty||0)<=0);
+   if(exhausted)records=records.filter(x=>x.id!==currentRecord.id);
+   try{localStorage.setItem(STORAGE_KEY,JSON.stringify(records));saveTransactions();renderAllViews();toast(exhausted?`Stock Out saved. ${currentRecord.batch} is exhausted and removed from active materials; History is preserved and FIFO ranks updated.`:`Stock Out saved: ${qty} sheets from ${currentRack.rack}.`)}catch(e){toast('Could not save Stock Out.');return}
+  });
+ }));
+}
+
+function toggleUnmovedStockOut(id,card){
+ const r=records.find(x=>x.id===id);if(!r||!card)return;
+ const old=card.querySelector('.unmoved-stockout-panel');if(old){old.remove();return}
+ const available=balance(r);if(available<=0){toast('No un-racked sheets are available for stock out.');return}
+ const d=new Date(),local=[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')+'T'+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+ const panel=document.createElement('section');panel.className='unmoved-stockout-panel';panel.style.cssText='margin-top:10px;padding:12px;border:2px solid #fca5a5;border-radius:13px;background:#fff7f7;color:#7f1d1d';
+ panel.innerHTML=`<b>Stock out — material not yet moved to a rack</b><p style="margin:5px 0 10px;font-size:13px">Available un-racked balance: <strong>${available} sheets</strong>. This will reduce the material balance and record the stock-out in History.</p><div class="row" style="align-items:end"><div class="field" style="margin:0"><label>Date &amp; time</label><input class="unmoved-out-time" type="datetime-local" value="${local}"></div><div class="field" style="margin:0;max-width:110px"><label>Qty (sheets)</label><input class="unmoved-out-qty" type="number" min="1" max="${available}" step="1" placeholder="Qty"></div></div><div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button type="button" class="unmoved-out-save" style="padding:10px 14px;border-radius:9px;color:white;font-weight:850">Save Stock Out</button><button type="button" class="unmoved-out-cancel" style="padding:10px 14px;border-radius:9px;background:#e7eef4;color:#334155;font-weight:750">Cancel</button></div>`;
+ const statusRow=card.querySelector('.status-row');statusRow.insertAdjacentElement('afterend',panel);panel.querySelector('.unmoved-out-cancel').addEventListener('click',()=>panel.remove());
+ panel.querySelector('.unmoved-out-save').addEventListener('click',()=>{
+  const current=records.find(x=>x.id===id);if(!current){toast('Material record not found.');return}
+  const qty=Number(panel.querySelector('.unmoved-out-qty').value),raw=panel.querySelector('.unmoved-out-time').value;
+  if(!Number.isInteger(qty)||qty<1){toast('Enter a valid whole-sheet stock-out quantity.');return}
+  const nowAvailable=balance(current);if(qty>nowAvailable){toast(`Only ${nowAvailable} un-racked sheets are available.`);return}
+  const when=raw?new Date(raw):new Date();if(Number.isNaN(when.getTime())){toast('Enter a valid date and time.');return}
+  const issueDate=[when.getFullYear(),String(when.getMonth()+1).padStart(2,'0'),String(when.getDate()).padStart(2,'0')].join('-');
+  current.qty=Math.max(0,Number(current.qty)-qty);
+  addTransaction('OUT',current,qty,issueDate,'Stock out from un-racked material · '+when.toLocaleString(),' ',when.toISOString());
+  recomputeSameDayFifoStatuses(issueDate,fifoKey(current));
+  const exhausted=Number(current.qty)<=0&&(current.racks||[]).every(x=>Number(x.qty||0)<=0);
+  if(exhausted)records=records.filter(x=>x.id!==current.id);
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(records));saveTransactions();renderAllViews();toast(exhausted?'Stock out saved. Material exhausted; History retained and FIFO updated.':`Stock out saved: ${qty} sheets. History, FIFO and dashboard updated.`)}catch(e){toast('Could not save stock out in browser storage.')}
+ });
+}
+
+function toggleMaterialAudit(id,button){
+ const record=records.find(x=>x.id===id);if(!record)return;
+ const card=button.closest('.material-card');const existing=card.querySelector('.material-audit-panel');if(existing){existing.remove();return;}
+ const rows=transactions.filter(t=>t.recordId===id).slice().sort((a,b)=>String(a.createdAt||a.date||'').localeCompare(String(b.createdAt||b.date||'')));
+ const fmt=t=>{const raw=t.createdAt||t.date||'';const d=new Date(raw);return Number.isNaN(d.getTime())?String(t.date||'Time not recorded'):d.toLocaleString()};
+ const panel=document.createElement('section');panel.className='material-audit-panel';
+ const rackHistory=(record.racks||[]).flatMap(r=>(r.history||[]).map(h=>({rack:r.rack,...h}))).sort((a,b)=>String(a.dateTime||'').localeCompare(String(b.dateTime||'')));
+ const txHtml=rows.length?rows.map(t=>`<div class="audit-row"><span><b>${t.type==='IN'?'STOCK IN':'STOCK OUT'}</b><br>${esc(t.note||t.rack||'Material transaction')}<br>${esc(fmt(t))}</span><strong style="color:${t.type==='IN'?'#15803d':'#b91c1c'}">${t.type==='IN'?'+':'−'}${Math.abs(Number(t.qty)||0)} sheets${t.rack?' · '+esc(t.rack):''}</strong></div>`).join(''):'<div class="hint">No saved stock transaction details for this material yet.</div>';
+ const rackHtml=rackHistory.length?rackHistory.map(h=>`<div class="audit-row"><span><b>RACK ${esc(h.type||'MOVEMENT')}</b><br>${esc(h.rack)} · ${esc(h.dateTime?new Date(h.dateTime).toLocaleString():'Time not recorded')}</span><strong>${Number(h.qty)>0?'+':''}${Number(h.qty)||0} sheets<br>Balance: ${Number(h.remaining)||0}</strong></div>`).join(''):'<div class="hint">No separate rack movement audit entries were recorded for this material.</div>';
+ panel.innerHTML=`<h4>◷ Complete material history</h4><div class="history-detail-grid"><div><small>Thickness</small><b>${esc(record.thickness)}</b></div><div><small>Colour</small><b>${esc(record.colour)}</b></div><div><small>Size</small><b>${esc(record.size)}</b></div><div><small>Batch</small><b>${esc(record.batch)}</b></div><div><small>Original stock-in quantity</small><b>${Number(record.qty)||0} sheets</b></div><div><small>Stock-in date</small><b>${esc(record.date||'—')}</b></div><div><small>FIFO priority now</small><b>${fifoBadge(record)||'No active FIFO rank (exhausted)'}</b></div><div><small>Current balance</small><b>${balance(record)} sheets</b></div></div><h4 style="margin-top:14px">Stock transactions</h4>${txHtml}<h4 style="margin-top:14px">Rack movement audit</h4>${rackHtml}<button type="button" class="secondary audit-close" style="margin-top:10px">Close details</button>`;
+ card.appendChild(panel);panel.querySelector('.audit-close').addEventListener('click',()=>panel.remove());panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function editRecord(id){
+ const r=records.find(x=>x.id===id);if(!r)return;
+ const card=[...document.querySelectorAll('.material-card')].find(el=>el.querySelector(`[data-edit="${id}"]`));
+ if(!card)return;
+ const prior=card.querySelector('.inline-edit-editor');if(prior){prior.remove();return}
+ const editor=document.createElement('div');editor.className='inline-edit-editor';
+ editor.innerHTML=`<h3 style="margin:4px 0 12px">✎ Edit material details</h3>
+ <div class="row"><div class="field"><label>Date</label><input class="e-date" type="date" value="${esc(r.date)}"></div>
+ <div class="field"><label>Type</label><select class="e-type"><option ${r.type==='Plant'?'selected':''}>Plant</option><option ${r.type==='Branch'?'selected':''}>Branch</option></select></div></div>
+ <div class="row"><div class="field"><label>Thickness</label><input class="e-thickness" value="${esc(r.thickness)}"></div><div class="field"><label>Colour</label><input class="e-colour" value="${esc(r.colour)}"></div></div>
+ <div class="row"><div class="field"><label>Size</label><select class="e-size">${['8x4','10x4','12x4','Unsized'].map(s=>`<option ${r.size===s?'selected':''}>${s}</option>`).join('')}</select></div><div class="field"><label>Batch (max 10)</label><input class="e-batch" maxlength="10" value="${esc(r.batch)}"></div></div>
+ <div class="row"><div class="field"><label>Stock quantity (sheets)</label><input class="e-qty" type="number" min="${moved(r)}" step="1" value="${Number(r.qty)}"></div><div class="field"><label>Name</label><input class="e-name" value="${esc(r.name||'')}"></div><div class="field"><label>City (Branch)</label><input class="e-city" value="${esc(r.city||'')}" placeholder="COCHIN / HYDERABAD"></div></div>
+ <div class="field"><label>Branch movement type</label><select class="e-kind"><option ${r.movementKind==='Bundle'?'selected':''}>Bundle</option><option ${r.movementKind==='Direct'?'selected':''}>Direct</option></select></div>
+ <div class="card-actions"><button type="button" class="inline-edit-save">✓ Save changes</button><button type="button" class="inline-edit-cancel">Cancel</button></div>`;
+ card.querySelector('.card-actions').insertAdjacentElement('beforebegin',editor);
+ editor.scrollIntoView({behavior:'smooth',block:'center'});
+ editor.querySelector('.e-date')?.focus({preventScroll:true});
+ editor.querySelectorAll('.e-thickness,.e-colour,.e-batch,.e-city').forEach(el=>el.addEventListener('input',()=>{const pos=el.selectionStart;el.value=el.value.toUpperCase();try{el.setSelectionRange(pos,pos)}catch(e){}}));
+ editor.querySelector('.inline-edit-cancel').addEventListener('click',()=>editor.remove());
+ editor.querySelector('.inline-edit-save').addEventListener('click',()=>{
+  const qty=Number(editor.querySelector('.e-qty').value), type=editor.querySelector('.e-type').value;
+  if(!Number.isInteger(qty)||qty<moved(r)){toast(`Stock quantity must be a whole number at least ${moved(r)} (already moved).`);return}
+  const batch=editor.querySelector('.e-batch').value.trim().toUpperCase();
+  if(!batch||batch.length>10){toast('Batch must contain 1–10 characters.');return}
+  Object.assign(r,{date:editor.querySelector('.e-date').value,type,thickness:editor.querySelector('.e-thickness').value.trim().toUpperCase(),colour:editor.querySelector('.e-colour').value.trim().toUpperCase(),size:editor.querySelector('.e-size').value,batch,qty,city:type==='Branch'?editor.querySelector('.e-city').value.trim().toUpperCase():'',movementKind:type==='Branch'?editor.querySelector('.e-kind').value:'',name:editor.querySelector('.e-name').value.trim()});
+  persist();toast('Material updated across Saved Data, Inventory, History, and Dashboard.');
+ });
+}
+function addMovement(id){
+ const r=records.find(x=>x.id===id); if(!r)return;
+ const card=[...document.querySelectorAll('.material-card')].find(el=>el.querySelector(`[data-move="${id}"]`));
+ if(!card)return;
+ let editor=card.querySelector('.inline-move-editor');
+ if(editor){editor.remove();return;}
+ editor=document.createElement('div');editor.className='inline-move-editor';
+ editor.innerHTML=`<h3 style="margin:3px 0 10px;color:#08783c">＋ Add / Move rack</h3><div class="inline-rack-rows"></div>
+ <div class="card-actions"><button type="button" class="inline-save" style="background:#baf3d7;color:#065f35;font-size:14px;padding:11px 14px">✓ Save rack movement</button><button type="button" class="inline-cancel">Cancel</button></div>`;
+ const actions=card.querySelector('.card-actions'); actions.insertAdjacentElement('beforebegin',editor);
+ const rows=editor.querySelector('.inline-rack-rows');
+ let draft=[{rack:'',qty:''}];
+ function drawRows(){
+  rows.innerHTML='';
+  draft.forEach((d,i)=>{
+   const row=document.createElement('div');row.className='rack-row';
+   row.innerHTML=`<div class="field"><label>Moved rack location</label><input class="inline-rack" data-i="${i}" data-key="rack" maxlength="12" value="${esc(d.rack)}"></div><div class="field"><label>Qty (sheets)</label><input class="inline-qty" data-i="${i}" data-key="qty" type="number" min="1" step="1" value="${esc(d.qty)}"></div><button type="button" class="rack-control add-rack" data-add="${i}" aria-label="Add rack">+</button><button type="button" class="rack-control remove-rack" data-remove="${i}" aria-label="Remove rack">−</button>`;
+   rows.appendChild(row);
+  });
+  rows.querySelectorAll('[data-key]').forEach(inp=>inp.addEventListener('input',()=>{
+   const i=Number(inp.dataset.i),key=inp.dataset.key;
+   draft[i][key]=key==='qty'?inp.value:(key==='rack'?inp.value.toUpperCase():inp.value.trim());
+   if(key==='rack'){const pos=inp.selectionStart;inp.value=inp.value.toUpperCase();try{inp.setSelectionRange(pos,pos)}catch(e){}}
+  }));
+  rows.querySelectorAll('[data-add]').forEach(btn=>btn.addEventListener('click',()=>{
+   const i=Number(btn.dataset.add),ni=i+1;draft.splice(ni,0,{rack:'',qty:''});drawRows();
+   const next=rows.querySelector(`[data-i="${ni}"][data-key="rack"]`);if(next){next.focus({preventScroll:true});setTimeout(()=>{next.closest('.rack-row')?.scrollIntoView({behavior:'smooth',block:'center'});next.focus({preventScroll:true})},120)}
+  }));
+  rows.querySelectorAll('[data-remove]').forEach(btn=>btn.addEventListener('click',()=>{
+   const i=Number(btn.dataset.remove);if(draft.length===1)draft[0]={rack:'',qty:''};else draft.splice(i,1);drawRows();
+  }));
+ }
+ drawRows();
+ editor.querySelector('.inline-cancel').addEventListener('click',()=>editor.remove());
+ editor.querySelector('.inline-save').addEventListener('click',()=>{
+  const valid=draft.filter(d=>d.rack.trim()&&d.qty!=='').map(d=>({rack:d.rack.trim().toUpperCase(),qty:Number(d.qty)}));
+  if(!valid.length){toast('Enter a rack location and quantity.');rows.querySelector('.inline-rack')?.focus();return}
+  if(valid.some(d=>!Number.isInteger(d.qty)||d.qty<1)){toast('Enter valid whole-sheet quantities.');return}
+  const total=valid.reduce((n,d)=>n+d.qty,0);
+  if(total>balance(r)){toast(`Only ${balance(r)} sheets remain to be moved.`);return}
+  for(const d of valid){
+   const existing=r.racks.find(x=>x.rack===d.rack);
+   const movedAt=new Date().toISOString();
+   if(existing){existing.qty=Number(existing.qty)+d.qty;existing.history=existing.history||[];existing.history.push({qty:d.qty,dateTime:movedAt});existing.movedAt=movedAt;}
+   else r.racks.push({rack:d.rack,qty:d.qty,movedAt,history:[{qty:d.qty,dateTime:movedAt}]});
+  }
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(records));renderAllViews();toast('Rack movement saved and all pages refreshed.');}
+  catch(e){toast('Could not save movement in browser storage.')}
+ });
+ editor.scrollIntoView({behavior:'smooth',block:'center'});
+ editor.querySelector('.inline-rack')?.focus({preventScroll:true});
+}
+function deleteRecord(id){if(!confirm('Delete this material record and all linked History transactions permanently from this browser? This cannot be undone.'))return;records=records.filter(r=>r.id!==id);transactions=transactions.filter(t=>t.recordId!==id);persist();toast('Record and linked history deleted. All pages recalculated.')}
+function renderInventory(){
+ const q=($('inventorySearch').value||'').trim().toLowerCase(), groups=new Map();let total=0;
+ // Keep every rack ever used visible, even after its last material batch is exhausted.
+ // Stock-out transactions preserve the rack name after the active material card is removed.
+ transactions.forEach(t=>{const rack=String(t.rack||'').trim().toUpperCase();if(rack&&!groups.has(rack))groups.set(rack,{rack,qty:0,items:[],everUsed:true})});
+ records.forEach(r=>(r.racks||[]).forEach(x=>{const rack=(x.rack||'').trim().toUpperCase();if(!rack)return;if(!groups.has(rack))groups.set(rack,{rack,qty:0,items:[],everUsed:true});const g=groups.get(rack);const qty=Math.max(0,Number(x.qty||0));g.qty+=qty;if(qty>0){g.items.push({r,qty});}total+=qty}));
+ $('invSheets').textContent=total;$('invRacks').textContent=groups.size;
+ const root=$('inventoryList');root.innerHTML='';const list=[...groups.values()].sort((a,b)=>a.rack.localeCompare(b.rack,undefined,{numeric:true})).filter(g=>[g.rack,...g.items.flatMap(it=>[it.r.thickness,it.r.colour,it.r.size,it.r.batch])].join(' ').toLowerCase().includes(q));
+ if(!list.length){root.innerHTML='<div class="empty">No rack inventory found. Save stock and assign rack quantities first.</div>';return}
+ list.forEach((g,index)=>{
+  const card=document.createElement('article');card.className='material-card inventory-rack-card';
+  const detailsId='rackDetails'+index;
+  const isOpen=openInventoryRacks.has(g.rack);
+  const details=g.qty>0&&g.items.length?`<div class="inventory-material-list">${g.items.map(it=>`<div class="inventory-material-item"><div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap"><div class="inventory-material-title">${esc(it.r.thickness)} · ${esc(it.r.colour)} · ${esc(it.r.size)}</div>${fifoBadge(it.r)}</div><div class="inventory-material-meta"><span>Batch: <b>${esc(it.r.batch)}</b></span><strong>${it.qty} SHEETS</strong></div><div class="hint">${esc(it.r.type==='Branch'?(it.r.city||'BRANCH'):'PLANT')} · Stock date: ${esc(it.r.date)}</div></div>`).join('')}</div>`:'';
+  card.innerHTML=`<button type="button" class="inventory-rack-toggle" ${g.qty>0?'':'disabled'} aria-expanded="${g.qty>0&&isOpen}" aria-controls="${detailsId}"><span class="inventory-rack-label">⌂ ${esc(g.rack)}</span><span class="inventory-rack-total">${g.qty} SHEETS</span><span class="inventory-rack-arrow" aria-hidden="true">${g.qty>0?(isOpen?'▴':'▾'):''}</span></button><div id="${detailsId}" class="inventory-rack-details ${g.qty>0&&isOpen?'':'hidden'}">${details}</div>`;
+  const toggle=card.querySelector('.inventory-rack-toggle');if(g.qty<=0){root.appendChild(card);return;}toggle.addEventListener('click',()=>{const detailsEl=card.querySelector('.inventory-rack-details'),open=detailsEl.classList.contains('hidden');detailsEl.classList.toggle('hidden',!open);if(open)openInventoryRacks.add(g.rack);else openInventoryRacks.delete(g.rack);toggle.setAttribute('aria-expanded',String(open));toggle.querySelector('.inventory-rack-arrow').textContent=open?'▴':'▾'});
+  root.appendChild(card);
+ });
+}
+function renderDashboard(){
+ const total=records.reduce((n,r)=>n+Number(r.qty||0),0),movedTotal=records.reduce((n,r)=>n+moved(r),0),pending=records.reduce((n,r)=>n+balance(r),0),racks=new Set();
+ records.forEach(r=>(r.racks||[]).forEach(x=>{if(x.rack&&Number(x.qty)>0)racks.add(String(x.rack).toUpperCase())}));
+ $('dashStock').textContent=total;$('dashMoved').textContent=movedTotal;$('dashPending').textContent=pending;$('dashRacks').textContent=racks.size;
+ const sizes={};records.forEach(r=>{const k=r.size||'Unsized';sizes[k]=(sizes[k]||0)+Number(r.qty||0)});
+ $('dashSizes').innerHTML=Object.keys(sizes).length?Object.entries(sizes).sort((a,b)=>a[0].localeCompare(b[0])).map(([size,qty])=>`<div class="dashboard-line"><span>${esc(size.toUpperCase())}</span><strong>${qty} SHEETS</strong></div>`).join(''):'<div class="hint">No stock records yet.</div>';
+ const topRows=(map,kind)=>{const rows=[...map.entries()].sort((a,b)=>b[1].qty-a[1].qty).slice(0,5);return rows.length?rows.map(([label,v],i)=>`<div class="rank-row"><div class="rank-number">${i+1}</div><div class="rank-info"><strong>${esc(label)}</strong><small>${esc(v.detail||'')} ${v.count!==undefined?'· '+v.count+' TRANSACTIONS':''}</small></div><strong class="rank-qty">${v.qty} SHEETS</strong></div>`).join(''):'<div class="rank-empty">No reliable history recorded yet.</div>'};
+ const materialKey=t=>`${String(t.thickness||'MATERIAL').toUpperCase()} · ${String(t.colour||'').toUpperCase()} · ${String(t.size||'UNSIZED').toUpperCase()} · BATCH ${String(t.batch||'UNKNOWN').toUpperCase()}`;
+ const aggregate=(items,keyFn,detailFn)=>{const map=new Map();items.forEach(t=>{const key=keyFn(t);if(!key||key==='UNKNOWN')return;const v=map.get(key)||{qty:0,count:0,detail:detailFn(t)};v.qty+=Math.abs(Number(t.qty)||0);v.count++;map.set(key,v)});return map};
+ const ins=transactions.filter(t=>t.type==='IN'),outs=transactions.filter(t=>t.type==='OUT');
+ $('dashTopIn').innerHTML=topRows(aggregate(ins,materialKey,t=>`${String(t.size||'').toUpperCase()} · BATCH ${String(t.batch||'').toUpperCase()}`));
+ $('dashTopOut').innerHTML=topRows(aggregate(outs,materialKey,t=>`${String(t.size||'').toUpperCase()} · BATCH ${String(t.batch||'').toUpperCase()}`));
+ const rackIn=new Map();records.forEach(r=>(r.racks||[]).forEach(x=>{const h=Array.isArray(x.history)?x.history:[];h.filter(z=>Number(z.qty)>0).forEach(z=>{const k=String(x.rack||'').toUpperCase();if(!k)return;const v=rackIn.get(k)||{qty:0,count:0,detail:'Recorded rack receipts'};v.qty+=Number(z.qty);v.count++;rackIn.set(k,v)})}));
+ $('dashRackIn').innerHTML=topRows(rackIn);
+ $('dashRackOut').innerHTML=topRows(aggregate(outs,t=>String(t.rack||'').toUpperCase(),t=>`Stock-out transactions`));
+}
+function renderFifoReport(){
+ if(!$('fifoBarChart'))return;
+ const allOuts=transactions.filter(t=>t.type==='OUT');
+ const known=allOuts.filter(t=>t.fifoStatus==='FOLLOWED'||t.fifoStatus==='NOT FOLLOWED');
+ const period=$('fifoPeriod').value||'daily';
+ const dateLocal=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+ const parseLocal=s=>{if(!/^\d{4}-\d{2}-\d{2}$/.test(String(s||'')))return null;const a=s.split('-').map(Number);return new Date(a[0],a[1]-1,a[2],12,0,0,0)};
+ const fmtShort=s=>{const d=parseLocal(s);return d?d.toLocaleDateString(undefined,{day:'2-digit',month:'short'}):s};
+ const today=dateLocal(new Date());
+ if(!$('fifoAnchorDate').value)$('fifoAnchorDate').value=today;
+ const years=[...new Set(allOuts.map(t=>String(t.date||'').slice(0,4)).filter(y=>/^\d{4}$/.test(y)))].sort();
+ const yearSel=$('fifoYear'),oldYear=yearSel.value;
+ yearSel.innerHTML='<option value="all">All years</option>'+years.map(y=>`<option value="${y}">${y}</option>`).join('');
+ if([...yearSel.options].some(o=>o.value===oldYear))yearSel.value=oldYear;else yearSel.value='all';
+ const year=yearSel.value,month=$('fifoMonth').value;
+ $('fifoAnchorWrap').style.display=period==='daily'?'block':'none';
+ $('fifoMonthWrap').style.display=period==='weekly'?'block':'none';
+ $('fifoYearWrap').style.display=['weekly','monthly'].includes(period)?'block':period==='yearly'?'block':'none';
+ $('fifoCustomDatesWrap').style.display=period==='custom'?'block':'none';
+ let from='',to='',filtered=known.slice();
+ if(period==='daily'){
+   const anchor=parseLocal($('fifoAnchorDate').value)||parseLocal(today);const monday=new Date(anchor);monday.setDate(anchor.getDate()-((anchor.getDay()+6)%7));const sunday=new Date(monday);sunday.setDate(monday.getDate()+6);from=dateLocal(monday);to=dateLocal(sunday);
+ } else if(period==='custom'){
+   from=$('fifoDateFrom').value||allOuts.map(t=>t.date).filter(Boolean).sort()[0]||today;
+   to=$('fifoDateTo').value||today;
+   if(from>to){const temp=from;from=to;to=temp}
+ } else if(period==='monthly'){
+   const monthlyYear=year!=='all'?year:String(new Date().getFullYear());from=monthlyYear+'-01-01';to=monthlyYear+'-12-31'
+ } else if(period==='weekly'){
+   if(month){from=month+'-01';const md=parseLocal(from);md.setMonth(md.getMonth()+1);md.setDate(0);to=dateLocal(md)}else if(year!=='all'){from=year+'-01-01';to=year+'-12-31'}
+ } else if(period==='yearly'&&year!=='all'){from=year+'-01-01';to=year+'-12-31'}
+ if(from)filtered=filtered.filter(t=>String(t.date||'')>=from);
+ if(to)filtered=filtered.filter(t=>String(t.date||'')<=to);
+ const followed=filtered.filter(t=>t.fifoStatus==='FOLLOWED').length,not=filtered.filter(t=>t.fifoStatus==='NOT FOLLOWED').length,total=followed+not,rate=total?Math.round(followed/total*100):null;
+ $('fifoFollowedCount').textContent=followed;$('fifoNotCount').textContent=not;$('fifoRate').textContent=rate===null?'—':rate+'%';$('fifoChecked').textContent=total;
+ $('fifoDonutGood').textContent=followed;$('fifoDonutBad').textContent=not;$('fifoDonutRate').textContent=rate===null?'—':rate+'%';
+ const deg=total?followed/total*360:0;$('fifoDonut').style.background=total?`conic-gradient(#16a34a 0deg ${deg}deg,#ef4444 ${deg}deg 360deg)`:'conic-gradient(#e5e7eb 0deg 360deg)';
+ $('fifoDonutSummary').textContent=total?`${followed} of ${total} recorded stock-outs followed FIFO. ${not} did not follow FIFO.`:'No stock-out records with FIFO status are available for this filter.';
+ const groups=new Map();
+ const addGroup=(key,label,dateLabel,t)=>{let v=groups.get(key);if(!v){v={key,label,dateLabel,good:0,bad:0};groups.set(key,v)}if(t){if(t.fifoStatus==='FOLLOWED')v.good++;else v.bad++}};
+ const mondayOf=d=>{const x=new Date(d);x.setDate(x.getDate()-((x.getDay()+6)%7));return x};
+ if(period==='daily'||period==='custom'){
+   const first=parseLocal(from),last=parseLocal(to);
+   if(first&&last){let d=new Date(first);let safety=0;while(d<=last&&safety++<400){const ds=dateLocal(d),weekday=d.toLocaleDateString(undefined,{weekday:'short'});addGroup(ds,period==='daily'?weekday:fmtShort(ds),fmtShort(ds),null);d.setDate(d.getDate()+1)}}
+   filtered.forEach(t=>{const k=String(t.date||'');if(groups.has(k))addGroup(k,'','',t)});
+   if(period==='daily'){
+     // Always show all seven Monday–Sunday columns, including days with no stock-outs.
+     const anchor=parseLocal($('fifoAnchorDate').value)||parseLocal(today),mon=mondayOf(anchor);groups.clear();
+     for(let i=0;i<7;i++){const d=new Date(mon);d.setDate(mon.getDate()+i);const ds=dateLocal(d);addGroup(ds,d.toLocaleDateString(undefined,{weekday:'long'}),fmtShort(ds),null)}
+     filtered.forEach(t=>{const k=String(t.date||'');if(groups.has(k))addGroup(k,'','',t)});
+   }
+ } else if(period==='weekly'){
+   filtered.forEach(t=>{const d=parseLocal(String(t.date||''));if(!d)return;const mon=mondayOf(d),key=dateLocal(mon);addGroup(key,'Week of '+fmtShort(key),fmtShort(key)+' – '+fmtShort(dateLocal(new Date(mon.getFullYear(),mon.getMonth(),mon.getDate()+6))),t)});
+   // Include empty weeks across the selected window so week-to-week comparison is visible.
+   if(from&&to){groups.clear();let d=mondayOf(parseLocal(from)),last=parseLocal(to),i=0;while(d<=last&&i++<60){const key=dateLocal(d),sun=new Date(d);sun.setDate(d.getDate()+6);groups.set(key,{key,label:'Week '+i,dateLabel:fmtShort(key)+'–'+fmtShort(dateLocal(sun)),good:0,bad:0});d.setDate(d.getDate()+7)}filtered.forEach(t=>{const d=parseLocal(String(t.date||''));if(!d)return;const key=dateLocal(mondayOf(d)),v=groups.get(key);if(v){if(t.fifoStatus==='FOLLOWED')v.good++;else v.bad++}})}
+   if(!from&&!to){const sorted=[...groups.keys()].sort();groups.clear();sorted.slice(-12).forEach(k=>{const v=known.filter(t=>{const d=parseLocal(String(t.date||''));return d&&dateLocal(mondayOf(d))===k});groups.set(k,{key:k,label:'Week of '+fmtShort(k),dateLabel:fmtShort(k),good:v.filter(t=>t.fifoStatus==='FOLLOWED').length,bad:v.filter(t=>t.fifoStatus==='NOT FOLLOWED').length})})}
+ } else if(period==='monthly'){
+   const chosenYear=year!=='all'?year:(month?month.slice(0,4):String(new Date().getFullYear()));
+   for(let i=0;i<12;i++){const key=`${chosenYear}-${String(i+1).padStart(2,'0')}`;groups.set(key,{key,label:new Date(Number(chosenYear),i,1).toLocaleDateString(undefined,{month:'short'}),dateLabel:chosenYear,good:0,bad:0})}
+   filtered.forEach(t=>{const key=String(t.date||'').slice(0,7),v=groups.get(key);if(v){if(t.fifoStatus==='FOLLOWED')v.good++;else v.bad++}})
+ } else if(period==='yearly'){
+   const allYears=[...new Set(allOuts.map(t=>String(t.date||'').slice(0,4)).filter(y=>/^\d{4}$/.test(y)))].sort();
+   const ys=year!=='all'?[year]:allYears.slice(-10);ys.forEach(y=>groups.set(y,{key:y,label:y,dateLabel:'Year',good:0,bad:0}));
+   filtered.forEach(t=>{const key=String(t.date||'').slice(0,4),v=groups.get(key);if(v){if(t.fifoStatus==='FOLLOWED')v.good++;else v.bad++}})
+ }
+ let rows=[...groups.values()].sort((a,b)=>a.key.localeCompare(b.key)).map(v=>{const n=v.good+v.bad;return {...v,total:n,rate:n?Math.round(v.good/n*100):null}});
+ if(period==='weekly'&&rows.length>16)rows=rows.slice(-16);
+ if(period==='custom'&&rows.length>31){const filteredRows=rows.filter((r,i)=>i%Math.ceil(rows.length/31)===0||i===rows.length-1);rows=filteredRows}
+ const chart=$('fifoBarChart');
+ if(!rows.length){chart.innerHTML='<div class="fifo-empty" style="width:100%;align-self:center">No FIFO stock-out data for this period yet.</div>'}
+ else {const max=Math.max(1,...rows.map(x=>x.total));chart.innerHTML=rows.map(r=>{const goodH=r.total?r.good/max*145:0,badH=r.total?r.bad/max*145:0;const ratio=`${r.good}/${r.total}`;return `<div class="fifo-bar-col"><div class="fifo-bar-value">${ratio}</div><div class="fifo-bar-stack" title="${esc(r.key)}: ${r.good} followed out of ${r.total}; ${r.bad} not followed"><div class="fifo-bar-bad" style="height:${badH}px"></div><div class="fifo-bar-good" style="height:${goodH}px"></div></div><div class="fifo-bar-label">${esc(r.label||r.key)}</div><div class="fifo-bar-date">${esc(r.dateLabel||'')}</div></div>`}).join('')}
+ const comparable=rows.filter(r=>r.total>0);let trend='neutral',trendText='Not enough recorded periods to compare FIFO performance.';
+ if(comparable.length>=2){const prev=comparable[comparable.length-2],last=comparable[comparable.length-1],diff=last.rate-prev.rate;trend=diff>0?'up':diff<0?'down':'neutral';trendText=`${last.label||last.key}: ${last.good}/${last.total} followed (${last.rate}%), compared with ${prev.label||prev.key}: ${prev.good}/${prev.total} (${prev.rate}%). ${diff>0?'FIFO performance improved by '+diff+' percentage points.':diff<0?'FIFO performance declined by '+Math.abs(diff)+' percentage points.':'FIFO performance did not change.'}`;$('fifoTrendPill').textContent=diff>0?`↑ Improved ${diff} pp`:diff<0?`↓ Declined ${Math.abs(diff)} pp`:'→ No change'}else $('fifoTrendPill').textContent='No comparison yet';
+ $('fifoTrendPill').className='trend-pill '+trend;$('fifoTrendText').textContent=trendText;
+ const table=$('fifoPeriodTable');table.innerHTML=rows.length?`<table class="fifo-table"><thead><tr><th>Period / Date</th><th>Followed</th><th>Not followed</th><th style="text-align:right">Followed / Total</th></tr></thead><tbody>${rows.slice().reverse().map(r=>`<tr><td>${esc(r.label||r.key)} ${r.dateLabel?'· '+esc(r.dateLabel):''}</td><td>${r.good}</td><td>${r.bad}</td><td class="rate-cell" style="color:${r.rate===null?'var(--muted)':r.rate>=80?'#15803d':r.rate>=50?'#b45309':'#b91c1c'}">${r.good}/${r.total}${r.rate===null?'':' · '+r.rate+'%'}</td></tr>`).join('')}</tbody></table>`:'<div class="fifo-empty">No period details to show.</div>';
+}
+$('menuBtn').addEventListener('click',()=>{const menu=$('sideMenu'),open=menu.classList.contains('hidden');menu.classList.toggle('hidden',!open);$('menuBtn').setAttribute('aria-expanded',String(open))});
+document.querySelectorAll('[data-menu-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.menuView)));
+$('fifoPeriod').addEventListener('change',renderFifoReport);$('fifoYear').addEventListener('change',renderFifoReport);$('fifoAnchorDate').addEventListener('change',renderFifoReport);$('fifoDateFrom').addEventListener('change',renderFifoReport);$('fifoDateTo').addEventListener('change',renderFifoReport);$('fifoMonth').addEventListener('change',()=>{if($('fifoMonth').value){$('fifoYear').value=$('fifoMonth').value.slice(0,4)}renderFifoReport()});
+$('fifoClearFilters').addEventListener('click',()=>{$('fifoMonth').value='';$('fifoYear').value='all';$('fifoAnchorDate').value=new Date().getFullYear()+'-'+String(new Date().getMonth()+1).padStart(2,'0')+'-'+String(new Date().getDate()).padStart(2,'0');$('fifoDateFrom').value='';$('fifoDateTo').value='';renderFifoReport()});$('fifoGoHistory').addEventListener('click',()=>{historyFilter='out';setView('history');setHistoryAction('OUT')});
+$('dashGoInventory').addEventListener('click',()=>setView('inventory'));$('dashGoHistory').addEventListener('click',()=>setView('history'));
+function deleteAllData(){if(!confirm('DELETE ALL DATA from this tracker on this phone? This removes all material records, rack quantities, stock-in/out history, and dashboard totals. Export Backup JSON first if you may need this data. This cannot be undone.'))return;records=[];transactions=[];try{localStorage.setItem(STORAGE_KEY,'[]');localStorage.setItem(TX_KEY,'[]')}catch(e){toast('Could not clear browser storage.');return}openInventoryRacks.clear();renderAllViews();toast('All tracker data deleted from this browser.')}
+document.querySelectorAll('[data-delete-all-data]').forEach(btn=>btn.addEventListener('click',deleteAllData));
+function renderHistory(){
+ const q=($('historySearch').value||'').toLowerCase().trim();
+ records.forEach(r=>{if(!transactions.some(t=>t.type==='IN'&&t.recordId===r.id)){transactions.push({id:'legacy-'+r.id,type:'IN',recordId:r.id,material:materialLabel(r),batch:r.batch,size:r.size,thickness:r.thickness,colour:r.colour,qty:Number(r.qty),date:r.date,note:'Initial stock entry (existing record)',createdAt:(r.date||'')+'T00:00:00.000Z',plantType:r.type||'Plant',city:r.city||'',movementKind:r.movementKind||'',name:r.name||''})}});
+ try{saveTransactions()}catch(e){}
+ const all=transactions.filter(t=>t.type==='IN'||t.type==='OUT');$('histAll').textContent=all.length;$('histIn').textContent=all.filter(t=>t.type==='IN').length;$('histOut').textContent=all.filter(t=>t.type==='OUT').length;
+ document.querySelectorAll('[data-histfilter]').forEach(b=>b.classList.toggle('active',b.dataset.histfilter===historyFilter));
+ const selectedThickness=$('hFilterThickness').value;const thicknesses=[...new Set(records.map(r=>String(r.thickness||'').trim()).filter(Boolean))].sort();$('hFilterThickness').innerHTML='<option value="">All materials</option>'+thicknesses.map(v=>`<option>${esc(v)}</option>`).join('');$('hFilterThickness').value=selectedThickness;
+ const dateMode=$('hFilterDate').value, todayStr=new Date().toISOString().slice(0,10);let from='',to='';if(dateMode==='today')from=to=todayStr;else if(dateMode==='7'||dateMode==='30'){to=todayStr;const d=new Date();d.setDate(d.getDate()-Number(dateMode)+1);from=d.toISOString().slice(0,10)}else if(dateMode==='custom'){from=$('hDateFrom').value;to=$('hDateTo').value}
+ const size=$('hFilterSize').value, typeFilter=$('hFilterStatus').value, thickness=$('hFilterThickness').value.toLowerCase(), colour=$('hFilterColour').value.toLowerCase().trim(), batch=$('hFilterBatch').value.toLowerCase().trim(), plantType=$('hFilterType').value;
+ const filtered=all.filter(t=>{
+  const record=records.find(r=>r.id===t.recordId);const resolved={...record,...t,plantType:t.plantType||t.typeOfRecord||record?.type||'Plant',city:t.city||record?.city||'',movementKind:t.movementKind||record?.movementKind||'',name:t.name||record?.name||''};
+  const hay=[resolved.material,resolved.batch,resolved.note,resolved.date,resolved.type,resolved.rack,resolved.colour,resolved.thickness,resolved.city,resolved.plantType,resolved.movementKind,resolved.name].join(' ').toLowerCase();
+  const d=t.date||'';return (historyFilter==='all'||(historyFilter==='in'?t.type==='IN':t.type==='OUT'))&&hay.includes(q)&&(!size||String(t.size||'Unsized').toLowerCase()===size.toLowerCase())&&(!typeFilter||t.type===typeFilter)&&(!thickness||String(t.thickness||'').toLowerCase().includes(thickness))&&(!colour||String(t.colour||'').toLowerCase().includes(colour))&&(!batch||String(t.batch||'').toLowerCase().includes(batch))&&(!plantType||String(resolved.plantType||'')===plantType)&&(!from||d>=from)&&(!to||d<=to);
+ }).sort((a,b)=>(b.createdAt||b.date).localeCompare(a.createdAt||a.date));
+ const root=$('historyList');root.innerHTML='';if(!filtered.length){root.innerHTML='<div class="empty">No stock transactions match these filters.</div>';return}
+ filtered.forEach(t=>{const record=records.find(r=>r.id===t.recordId)||{};const plantType=t.plantType||record.type||'Plant';const city=t.city||record.city||'';const movementKind=t.movementKind||record.movementKind||'';const name=t.name||record.name||'';const thickness=t.thickness||record.thickness||'—';const colour=t.colour||record.colour||'—';const sizeValue=t.size||record.size||'—';const batchValue=t.batch||record.batch||'—';const card=document.createElement('article');card.className='material-card';card.innerHTML=`<div class="card-top"><span class="tag" style="background:${t.type==='IN'?'#dcfce7':'#fee2e2'};color:${t.type==='IN'?'#166534':'#991b1b'}">STOCK ${t.type==='IN'?'IN':'OUT'}</span><span class="stock-total">Date: ${esc(t.date||'—')} · Time: ${esc((()=>{const d=new Date(t.createdAt||((t.date||'')+'T00:00:00'));return Number.isNaN(d.getTime())?'Time not recorded':d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})})())}</span></div>${t.type==='OUT'?`<div class="fifo-status ${((t.fifoStatus||'').includes('NOT FOLLOWED'))?'fifo-bad':'fifo-good'}">${t.fifoStatus==='NOT FOLLOWED'?'⚠ FIFO NOT FOLLOWED':t.fifoStatus==='FOLLOWED'?'✓ FIFO FOLLOWED':'FIFO status unavailable for this older transaction'}</div>`:''}<div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap"><div class="history-material-line">${esc(thickness)} · ${esc(colour)} · ${esc(sizeValue)} · Batch ${esc(batchValue)}</div>${t.type==='IN'&&record.id?fifoBadge(record):''}</div><div class="history-meta-line"><strong>Type:</strong> ${esc(plantType)}${plantType==='Branch'?` <span>·</span> <strong>City:</strong> ${esc(city||'—')} <span>·</span> <strong>Bundle/Direct:</strong> ${esc(movementKind||'—')}`:''}</div><div class="history-qty-line"><div class="history-meta-line"><strong>Name:</strong> ${esc(name||'—')}</div><strong class="history-qty" style="color:${t.type==='IN'?'#15803d':'#b91c1c'}">${t.type==='IN'?'+':'−'}${Number(t.qty)||0} SHEETS</strong></div>`;root.appendChild(card)});
+}
+function setHistoryAction(type){historyFilter=type==='IN'?'in':'out';$('showStockIn').classList.toggle('active',type==='IN');$('showStockOut').classList.toggle('active',type==='OUT');document.querySelectorAll('[data-histfilter]').forEach(b=>b.classList.toggle('active',b.dataset.histfilter===historyFilter));renderHistory()}
+$('showStockIn').addEventListener('click',()=>setHistoryAction('IN'));$('showStockOut').addEventListener('click',()=>setHistoryAction('OUT'));
+$('clearHistorySearch').addEventListener('click',()=>{$('historySearch').value='';renderHistory();$('historySearch').focus()});
+$('clearHistoryFilters').addEventListener('click',()=>{['hFilterSize','hFilterStatus','hFilterThickness','hFilterType'].forEach(id=>$(id).value='');$('hFilterDate').value='all';$('hFilterColour').value='';$('hFilterBatch').value='';$('hDateFrom').value='';$('hDateTo').value='';$('hCustomDates').style.display='none';renderHistory()});
+['hFilterSize','hFilterStatus','hFilterThickness','hFilterType','hFilterColour','hFilterBatch','hDateFrom','hDateTo'].forEach(id=>$(id).addEventListener('input',renderHistory));$('hFilterDate').addEventListener('change',()=>{$('hCustomDates').style.display=$('hFilterDate').value==='custom'?'block':'none';renderHistory()});
+$('inventorySearch').addEventListener('input',renderInventory);$('historySearch').addEventListener('input',renderHistory);document.querySelectorAll('[data-histfilter]').forEach(b=>b.addEventListener('click',()=>{historyFilter=b.dataset.histfilter;$('showStockIn').classList.toggle('active',historyFilter==='in');$('showStockOut').classList.toggle('active',historyFilter==='out');renderHistory()}));
+
+$('moreFiltersToggle').addEventListener('click',()=>{const panel=$('moreFiltersPanel'),opening=panel.classList.contains('hidden');panel.classList.toggle('hidden',!opening);$('moreFiltersToggle').textContent=opening?'▲':'▼';$('moreFiltersToggle').setAttribute('aria-expanded',String(opening));$('moreFiltersToggle').title=opening?'Hide more filters':'Show more filters'});
+$('search').addEventListener('input',()=>{ $('clearSearch').style.display='block';renderCards() });$('clearSearch').addEventListener('click',()=>{$('search').value='';$('clearSearch').style.display='block';renderCards();$('search').focus()});
+$('clearFilters').addEventListener('click',()=>{['filterSize','filterStatus','filterThickness','filterType'].forEach(id=>$(id).value='');$('filterColour').value='';$('filterBatch').value='';$('datePreset').value='all';$('filterDateFrom').value='';$('filterDateTo').value='';$('customDateFields').style.display='none';renderCards()});['filterSize','filterStatus','filterThickness','filterType'].forEach(id=>$(id).addEventListener('change',renderCards));['filterColour','filterBatch','filterDateFrom','filterDateTo'].forEach(id=>$(id).addEventListener('input',renderCards));
+$('datePreset').addEventListener('change',()=>{$('customDateFields').style.display=$('datePreset').value==='custom'?'block':'none';renderCards()});$('thicknessPicker').addEventListener('change',()=>{if($('thicknessPicker').value)$('thickness').value=$('thicknessPicker').value});
+['date','filterDateFrom','filterDateTo'].forEach(id=>{const el=$(id);if(el){el.addEventListener('click',()=>{try{if(el.showPicker)el.showPicker()}catch(e){}});el.addEventListener('focus',()=>{try{if(el.showPicker)el.showPicker()}catch(e){}})}});
+document.querySelectorAll('[data-summary]').forEach(b=>b.addEventListener('click',()=>{summaryFilter=b.dataset.summary;renderCards()}));
+$('darkBtn').addEventListener('click',()=>{document.body.classList.add('dark');$('darkBtn').classList.add('active');$('lightBtn').classList.remove('active')});
+$('lightBtn').addEventListener('click',()=>{document.body.classList.remove('dark');$('lightBtn').classList.add('active');$('darkBtn').classList.remove('active')});
+$('exportBtn').addEventListener('click',()=>{const csvRows=[['Date','Type','City','Movement Type','Thickness','Colour','Size','Batch','Stock Qty','Name','Moved Qty','Balance','Status','Racks']];records.forEach(r=>csvRows.push([r.date,r.type,r.city||'',r.movementKind||'',r.thickness,r.colour,r.size,r.batch,r.qty,r.name||'',moved(r),balance(r),status(r),(r.racks||[]).map(x=>x.rack+':'+x.qty).join('; ')]));const csv=csvRows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');download(csv,'acp-materials.csv','text/csv;charset=utf-8;')});
+function download(content,name,type){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)}
+$('backupBtn').addEventListener('click',()=>download(JSON.stringify({format:'ACP_TRACKER_BACKUP_V1',records,transactions},null,2),'acp-tracker-backup.json','application/json'));
+$('importBtn').addEventListener('click',()=>$('importFile').click());
+$('importFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const data=JSON.parse(await f.text());const nextRecords=Array.isArray(data)?data:data.records;const nextTransactions=Array.isArray(data.transactions)?data.transactions:null;if(!Array.isArray(nextRecords))throw Error('JSON must contain saved records');if(!confirm('Import will replace current saved records'+(nextTransactions?' and history transactions':'')+'. Continue?'))return;records=nextRecords;localStorage.setItem(STORAGE_KEY,JSON.stringify(records));if(nextTransactions){transactions=nextTransactions;saveTransactions()}renderAllViews();toast('Import completed.')}catch(err){toast('Import failed: invalid or unsupported JSON file.')}e.target.value=''});
+function renderRecentRacks(){const all=[...new Set(records.flatMap(r=>(r.racks||[]).map(x=>x.rack)))].slice(0,8);$('rackChips').innerHTML=all.length?'<span class="hint">Saved racks (tap to fill):</span>'+all.map(x=>`<button type="button" class="rack-chip" data-fillrack="${esc(x)}">${esc(x)}</button>`).join(''):'<span class="hint">Saved racks will appear here.</span>';$('rackChips').querySelectorAll('[data-fillrack]').forEach(b=>b.addEventListener('click',()=>{const empty=rackDraft.find(r=>!r.rack);if(empty)empty.rack=b.dataset.fillrack;else rackDraft.push({rack:b.dataset.fillrack,qty:''});renderRackInputs()}))}
+const oldRender=renderCards;
+renderCards=function(){oldRender();renderRecentRacks()};
+renderCards();renderRackInputs();updateTypeFields();
+document.addEventListener('keydown',e=>{
+ if(e.key!=='Enter')return;
+ const el=e.target;
+ if(!(el instanceof HTMLInputElement)||el.type==='date')return;
+ // Home form: after entering rack quantity, go directly to Save Data, not another field.
+ if(el.closest('#stockForm')){
+  if(el.dataset.key==='qty' && el.hasAttribute('data-rack')){
+   e.preventDefault();el.blur();const save=$('stockForm').querySelector('button[type=submit]');save.focus({preventScroll:true});save.scrollIntoView({behavior:'smooth',block:'center'});return;
+  }
+  if(el.id==='qty'){
+   e.preventDefault();el.blur();const save=$('stockForm').querySelector('button[type=submit]');save.focus({preventScroll:true});save.scrollIntoView({behavior:'smooth',block:'center'});return;
+  }
+  if(el.id==='otherCity')return;
+  e.preventDefault();
+  const fields=[...$('stockForm').querySelectorAll('input:not([type=hidden]):not([disabled]),select:not([disabled])')].filter(x=>x.offsetParent!==null);
+  const idx=fields.indexOf(el);
+  if(idx>=0&&idx<fields.length-1){fields[idx+1].focus();fields[idx+1].scrollIntoView({behavior:'smooth',block:'center'});if(fields[idx+1].select)fields[idx+1].select();}
+  return;
+ }
+ // Saved Data rack movement: keyboard arrow/Enter moves to the save button and exposes it.
+ if(el.matches('.inline-qty')){
+  e.preventDefault();el.blur();const editor=el.closest('.inline-move-editor');const save=editor?.querySelector('.inline-save');if(save){save.focus({preventScroll:true});save.scrollIntoView({behavior:'smooth',block:'center'})}
+ }
+});
+
+</script>
+</body>
+</html>
